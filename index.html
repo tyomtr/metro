@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>銀座線 発車メロディー リスニングテスト</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    .hidden { display: none; }
+    button {
+      font-size: 20px;
+      padding: 12px 24px;
+      margin: 10px;
+    }
+    .answer {
+      font-size: 30px;
+      margin: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 設定画面 -->
+  <div id="setup">
+    <h1>銀座線 発車メロディー リスニングテスト</h1>
+    <p>出題数を選択</p>
+    <button onclick="startGame(5)">5問</button>
+    <button onclick="startGame(10)">10問</button>
+    <button onclick="startGame(999)">すべて</button>
+  </div>
+
+  <!-- 出題画面 -->
+  <div id="quiz" class="hidden">
+    <h2 id="progress"></h2>
+    <button onclick="playAudio()">▶ 再生</button>
+    <div id="answer" class="answer hidden"></div>
+    <button id="nextBtn" class="hidden" onclick="nextQuestion()">次へ</button>
+    <button id="endBtn" onclick="endGame()">終了</button>
+  </div>
+
+  <!-- 結果画面 -->
+  <div id="result" class="hidden">
+    <h2>おつかれさま！</h2>
+    <button onclick="location.reload()">もう一度</button>
+  </div>
+
+<script>
+  // ===== データ（ここを編集）=====
+  const data = [
+    { audio: "audio/00 - 101.mp3", answer: "道はここから（渋谷1番線）" },
+    { audio: "audio/00 - 102.mp3", answer: "アンディーン（渋谷2番線）" },
+    { audio: "audio/00 - 103.mp3", answer: "永遠に続く道（表参道A線）" },
+    { audio: "audio/00 - 104.mp3", answer: "早瀬（表参道B線）" },
+    { audio: "audio/00 - 105.mp3", answer: "ようこそ！（外苑前A線）" },
+    { audio: "audio/00 - 106.mp3", answer: "Ready To Go（外苑前B線）" },
+    { audio: "audio/00 - 107.mp3", answer: "いつかきっと（青山一丁目A線）" },
+    { audio: "audio/00 - 108.mp3", answer: "コンシェルジュ（青山一丁目B線）" },
+    { audio: "audio/00 - 109.mp3", answer: "星を探して（赤坂見附A線）" },
+    { audio: "audio/00 - 110.mp3", answer: "オレンジピール（赤坂見附B線）" },
+    { audio: "audio/00 - 111.mp3", answer: "オリジナル曲（溜池山王A線）" },
+    { audio: "audio/00 - 112.mp3", answer: "オリジナル曲（溜池山王B線）" },
+    { audio: "audio/00 - 113.mp3", answer: "シトラスの香り（虎ノ門A線）" },
+    { audio: "audio/00 - 114.mp3", answer: "玉紫陽花（虎ノ門B線）" },
+    { audio: "audio/00 - 115.mp3", answer: "スタートライン（新橋A線）" },
+    { audio: "audio/00 - 116.mp3", answer: "Fast River（新橋B線）" },
+    { audio: "audio/00 - 117.mp3", answer: "銀座カンカン娘（銀座A線）" },
+    { audio: "audio/00 - 118.mp3", answer: "銀座カンカン娘（銀座B線）" },
+    { audio: "audio/00 - 119.mp3", answer: "蜜柑色の夢（京橋A線）" },
+    { audio: "audio/00 - 120.mp3", answer: "雪月花（京橋B線）" },
+    { audio: "audio/00 - 121.mp3", answer: "お江戸日本橋（日本橋A線）" },
+    { audio: "audio/00 - 122.mp3", answer: "お江戸日本橋（日本橋B線）" },
+    { audio: "audio/00 - 123.mp3", answer: "お江戸日本橋（三越前A線）" },
+    { audio: "audio/00 - 124.mp3", answer: "お江戸日本橋（三越前B線）" },
+    { audio: "audio/00 - 125.mp3", answer: "お祭りマンボ（神田A線）" },
+    { audio: "audio/00 - 126.mp3", answer: "お祭りマンボ（神田B線）" },
+    { audio: "audio/00 - 127.mp3", answer: "オリジナル曲（末広町A線）" },
+    { audio: "audio/00 - 128.mp3", answer: "オリジナル曲（末広町B線）" },
+    { audio: "audio/00 - 129.mp3", answer: "オリジナル曲（上野広小路A線）" },
+    { audio: "audio/00 - 130.mp3", answer: "オリジナル曲（上野広小路B線）" },
+    { audio: "audio/00 - 131.mp3", answer: "さくら（独唱）（上野A線）" },
+    { audio: "audio/00 - 132.mp3", answer: "さくら（独唱）（上野B線）" },
+    { audio: "audio/00 - 133.mp3", answer: "オリジナル曲（稲荷町A線）" },
+    { audio: "audio/00 - 134.mp3", answer: "オリジナル曲（稲荷町B線）" },
+    { audio: "audio/00 - 135.mp3", answer: "オリジナル曲（田原町A線）" },
+    { audio: "audio/00 - 136.mp3", answer: "オリジナル曲（田原町B線）" },
+    { audio: "audio/00 - 137.mp3", answer: "花（浅草1番線）" },
+    { audio: "audio/00 - 138.mp3", answer: "花（浅草2番線）" },
+    { audio: "audio/00 - 139.mp3", answer: "水の都（A線乗降促進）" },
+    { audio: "audio/00 - 140.mp3", answer: "小鳥のワルツ（B線乗降促進）" }
+  ];
+
+  let questions = [];
+  let current = 0;
+  let audio = new Audio();
+
+  function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+  function startGame(count) {
+    document.getElementById("setup").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+
+    const shuffled = shuffle([...data]);
+    questions = shuffled.slice(0, Math.min(count, data.length));
+    current = 0;
+
+    loadQuestion();
+  }
+
+  function loadQuestion() {
+    document.getElementById("answer").classList.add("hidden");
+    document.getElementById("nextBtn").classList.add("hidden");
+
+    document.getElementById("progress").textContent =
+      `問題 ${current + 1} / ${questions.length}`;
+
+    audio.src = questions[current].audio;
+
+    audio.onended = () => {
+      document.getElementById("answer").textContent =
+        questions[current].answer;
+      document.getElementById("answer").classList.remove("hidden");
+      document.getElementById("nextBtn").classList.remove("hidden");
+    };
+
+    const endBtn = document.getElementById("endBtn");
+    if (current === questions.length - 1) {
+    endBtn.classList.add("hidden");   // 最終問題 → 非表示
+    } else {
+    endBtn.classList.remove("hidden"); // それ以外 → 表示
+    }  
+
+    audio.play();
+  }
+
+  function playAudio() {
+    audio.play();
+  }
+
+  function nextQuestion() {
+    current++;
+
+    if (current >= questions.length) {
+      document.getElementById("quiz").classList.add("hidden");
+      document.getElementById("result").classList.remove("hidden");
+      return;
+    }
+
+    loadQuestion();
+  }
+
+  function endGame() {
+    if (!confirm("途中で終了しますか？")) return;
+
+    // 再生中の音声を止める
+    audio.pause();
+    audio.currentTime = 0;
+
+    // 画面切り替え
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>

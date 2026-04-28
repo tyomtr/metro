@@ -20,6 +20,12 @@
       margin: 20px;
       font-weight: bold;
     }
+
+    .answer small {
+     font-size: 18px;
+      color: #666;
+    }
+
   </style>
 </head>
 <body>
@@ -51,46 +57,46 @@
 <script>
   // ===== データ（ここを編集）=====
   const data = [
-    { audio: "audio/00 - 101.mp3", answer: "道はここから（渋谷1番線）" },
-    { audio: "audio/00 - 102.mp3", answer: "アンディーン（渋谷2番線）" },
-    { audio: "audio/00 - 103.mp3", answer: "永遠に続く道（表参道A線）" },
-    { audio: "audio/00 - 104.mp3", answer: "早瀬（表参道B線）" },
-    { audio: "audio/00 - 105.mp3", answer: "ようこそ！（外苑前A線）" },
-    { audio: "audio/00 - 106.mp3", answer: "Ready To Go（外苑前B線）" },
-    { audio: "audio/00 - 107.mp3", answer: "いつかきっと（青山一丁目A線）" },
-    { audio: "audio/00 - 108.mp3", answer: "コンシェルジュ（青山一丁目B線）" },
-    { audio: "audio/00 - 109.mp3", answer: "星を探して（赤坂見附A線）" },
-    { audio: "audio/00 - 110.mp3", answer: "オレンジピール（赤坂見附B線）" },
-    { audio: "audio/00 - 111.mp3", answer: "オリジナル曲（溜池山王A線）" },
-    { audio: "audio/00 - 112.mp3", answer: "オリジナル曲（溜池山王B線）" },
-    { audio: "audio/00 - 113.mp3", answer: "シトラスの香り（虎ノ門A線）" },
-    { audio: "audio/00 - 114.mp3", answer: "玉紫陽花（虎ノ門B線）" },
-    { audio: "audio/00 - 115.mp3", answer: "スタートライン（新橋A線）" },
-    { audio: "audio/00 - 116.mp3", answer: "Fast River（新橋B線）" },
-    { audio: "audio/00 - 117.mp3", answer: "銀座カンカン娘（銀座A線）" },
-    { audio: "audio/00 - 118.mp3", answer: "銀座カンカン娘（銀座B線）" },
-    { audio: "audio/00 - 119.mp3", answer: "蜜柑色の夢（京橋A線）" },
-    { audio: "audio/00 - 120.mp3", answer: "雪月花（京橋B線）" },
-    { audio: "audio/00 - 121.mp3", answer: "お江戸日本橋（日本橋A線）" },
-    { audio: "audio/00 - 122.mp3", answer: "お江戸日本橋（日本橋B線）" },
-    { audio: "audio/00 - 123.mp3", answer: "お江戸日本橋（三越前A線）" },
-    { audio: "audio/00 - 124.mp3", answer: "お江戸日本橋（三越前B線）" },
-    { audio: "audio/00 - 125.mp3", answer: "お祭りマンボ（神田A線）" },
-    { audio: "audio/00 - 126.mp3", answer: "お祭りマンボ（神田B線）" },
-    { audio: "audio/00 - 127.mp3", answer: "オリジナル曲（末広町A線）" },
-    { audio: "audio/00 - 128.mp3", answer: "オリジナル曲（末広町B線）" },
-    { audio: "audio/00 - 129.mp3", answer: "オリジナル曲（上野広小路A線）" },
-    { audio: "audio/00 - 130.mp3", answer: "オリジナル曲（上野広小路B線）" },
-    { audio: "audio/00 - 131.mp3", answer: "さくら（独唱）（上野A線）" },
-    { audio: "audio/00 - 132.mp3", answer: "さくら（独唱）（上野B線）" },
-    { audio: "audio/00 - 133.mp3", answer: "オリジナル曲（稲荷町A線）" },
-    { audio: "audio/00 - 134.mp3", answer: "オリジナル曲（稲荷町B線）" },
-    { audio: "audio/00 - 135.mp3", answer: "オリジナル曲（田原町A線）" },
-    { audio: "audio/00 - 136.mp3", answer: "オリジナル曲（田原町B線）" },
-    { audio: "audio/00 - 137.mp3", answer: "花（浅草1番線）" },
-    { audio: "audio/00 - 138.mp3", answer: "花（浅草2番線）" },
-    { audio: "audio/00 - 139.mp3", answer: "水の都（A線乗降促進）" },
-    { audio: "audio/00 - 140.mp3", answer: "小鳥のワルツ（B線乗降促進）" }
+    { audio: "audio/00 - 101.mp3", title: "道はここから", station: "G-01 渋谷 1番線" },
+    { audio: "audio/00 - 102.mp3", title: "アンディーン", station: "G-01 渋谷 2番線" },
+    { audio: "audio/00 - 103.mp3", title: "永遠に続く道", station: "G-02 表参道 A線" },
+    { audio: "audio/00 - 104.mp3", title: "早瀬", station: "G-02 表参道 B線" },
+    { audio: "audio/00 - 105.mp3", title: "ようこそ！", station: "G-03 外苑前 A線" },
+    { audio: "audio/00 - 106.mp3", title: "Ready To Go", station: "G-03 外苑前 B線" },
+    { audio: "audio/00 - 107.mp3", title: "いつかきっと", station: "G-04 青山一丁目 A線" },
+    { audio: "audio/00 - 108.mp3", title: "コンシェルジュ", station: "G-04 青山一丁目B 線" },
+    { audio: "audio/00 - 109.mp3", title: "星を探して", station: "G-05 赤坂見附 A線" },
+    { audio: "audio/00 - 110.mp3", title: "オレンジピール", station: "G-05 赤坂見附 B線" },
+    { audio: "audio/00 - 111.mp3", title: "オリジナル曲", station: "G-06 溜池山王 A線" },
+    { audio: "audio/00 - 112.mp3", title: "オリジナル曲", station: "G-06 溜池山王 B線" },
+    { audio: "audio/00 - 113.mp3", title: "シトラスの香り", station: "G-07 虎ノ門 A線" },
+    { audio: "audio/00 - 114.mp3", title: "玉紫陽花", station: "G-07 虎ノ門 B線" },
+    { audio: "audio/00 - 115.mp3", title: "スタートライン", station: "G-08 新橋 A線" },
+    { audio: "audio/00 - 116.mp3", title: "Fast River", station: "G-08 新橋 B線" },
+    { audio: "audio/00 - 117.mp3", title: "銀座カンカン娘", station: "G-09 銀座 A線" },
+    { audio: "audio/00 - 118.mp3", title: "銀座カンカン娘", station: "G-09 銀座 B線" },
+    { audio: "audio/00 - 119.mp3", title: "蜜柑色の夢", station: "G-10 京橋 A線" },
+    { audio: "audio/00 - 120.mp3", title: "雪月花", station: "G-10 京橋 B線" },
+    { audio: "audio/00 - 121.mp3", title: "お江戸日本橋", station: "G-11 日本橋 A線" },
+    { audio: "audio/00 - 122.mp3", title: "お江戸日本橋", station: "G-11 日本橋 B線" },
+    { audio: "audio/00 - 123.mp3", title: "お江戸日本橋", station: "G-12 三越前 A線" },
+    { audio: "audio/00 - 124.mp3", title: "お江戸日本橋", station: "G-12 三越前 B線" },
+    { audio: "audio/00 - 125.mp3", title: "お祭りマンボ", station: "G-13 神田 A線" },
+    { audio: "audio/00 - 126.mp3", title: "お祭りマンボ", station: "G-13 神田 B線" },
+    { audio: "audio/00 - 127.mp3", title: "オリジナル曲", station: "G-14 末広町 A線" },
+    { audio: "audio/00 - 128.mp3", title: "オリジナル曲", station: "G-14 末広町 B線" },
+    { audio: "audio/00 - 129.mp3", title: "オリジナル曲", station: "G-15 上野広小路 A線" },
+    { audio: "audio/00 - 130.mp3", title: "オリジナル曲", station: "G-15 上野広小路 B線" },
+    { audio: "audio/00 - 131.mp3", title: "さくら（独唱）", station: "G-16 上野 A線" },
+    { audio: "audio/00 - 132.mp3", title: "さくら（独唱）", station: "G-16 上野 B線" },
+    { audio: "audio/00 - 133.mp3", title: "オリジナル曲", station: "G-17 稲荷町 A線" },
+    { audio: "audio/00 - 134.mp3", title: "オリジナル曲", station: "G-17 稲荷町 B線" },
+    { audio: "audio/00 - 135.mp3", title: "オリジナル曲", station: "G-18 田原町 A線" },
+    { audio: "audio/00 - 136.mp3", title: "オリジナル曲", station: "G-18 田原町 B線" },
+    { audio: "audio/00 - 137.mp3", title: "花", station: "G-19 浅草 1番線" },
+    { audio: "audio/00 - 138.mp3", title: "花", station: "G-19 浅草 2番線" },
+    { audio: "audio/00 - 139.mp3", title: "水の都", station: "A線乗降促進" },
+    { audio: "audio/00 - 140.mp3", title: "小鳥のワルツ", station: "B線乗降促進" }
   ];
 
   let questions = [];
@@ -126,8 +132,11 @@
     audio.src = questions[current].audio;
 
     audio.onended = () => {
-      document.getElementById("answer").textContent =
-        questions[current].answer;
+      const q = questions[current];
+
+      document.getElementById("answer").innerHTML =
+      `${q.title}<br><small>${q.station}</small>`;
+
       document.getElementById("answer").classList.remove("hidden");
       document.getElementById("nextBtn").classList.remove("hidden");
     };

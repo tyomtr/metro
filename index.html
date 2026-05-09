@@ -33,7 +33,14 @@
   <!-- 設定画面 -->
   <div id="setup">
     <h1>東京メトロ 発車サイン音クイズ</h1>
-    <p>出題数を選択</p>
+    <h2>出題路線・出題数を選択</h2>
+
+    <select id="lineSelect">
+      <option value="all">すべて</option>
+      <option value="丸ノ内線">丸ノ内線</option>
+      <option value="銀座線">銀座線</option>
+    </select>
+    <br><br>
     <button onclick="startGame(5)">5問</button>
     <button onclick="startGame(10)">10問</button>
     <button onclick="startGame(999)">すべて</button>
@@ -57,110 +64,111 @@
 <script>
   // ===== データ（ここを編集）=====
   const data = [
-    { audio: "audio/1-銀座線/00 - 101.mp3", title: "道はここから", station: "G-01 渋谷 1番線" },
-    { audio: "audio/1-銀座線/00 - 102.mp3", title: "アンディーン", station: "G-01 渋谷 2番線" },
-    { audio: "audio/1-銀座線/00 - 103.mp3", title: "永遠に続く道", station: "G-02 表参道 A線" },
-    { audio: "audio/1-銀座線/00 - 104.mp3", title: "早瀬", station: "G-02 表参道 B線" },
-    { audio: "audio/1-銀座線/00 - 105.mp3", title: "ようこそ！", station: "G-03 外苑前 A線" },
-    { audio: "audio/1-銀座線/00 - 106.mp3", title: "Ready To Go", station: "G-03 外苑前 B線" },
-    { audio: "audio/1-銀座線/00 - 107.mp3", title: "いつかきっと", station: "G-04 青山一丁目 A線" },
-    { audio: "audio/1-銀座線/00 - 108.mp3", title: "コンシェルジュ", station: "G-04 青山一丁目B 線" },
-    { audio: "audio/1-銀座線/00 - 109.mp3", title: "星を探して", station: "G-05 赤坂見附 A線" },
-    { audio: "audio/1-銀座線/00 - 110.mp3", title: "オレンジピール", station: "G-05 赤坂見附 B線" },
-    { audio: "audio/1-銀座線/00 - 111.mp3", title: "オリジナル曲", station: "G-06 溜池山王 A線" },
-    { audio: "audio/1-銀座線/00 - 112.mp3", title: "オリジナル曲", station: "G-06 溜池山王 B線" },
-    { audio: "audio/1-銀座線/00 - 113.mp3", title: "シトラスの香り", station: "G-07 虎ノ門 A線" },
-    { audio: "audio/1-銀座線/00 - 114.mp3", title: "玉紫陽花", station: "G-07 虎ノ門 B線" },
-    { audio: "audio/1-銀座線/00 - 115.mp3", title: "スタートライン", station: "G-08 新橋 A線" },
-    { audio: "audio/1-銀座線/00 - 116.mp3", title: "Fast River", station: "G-08 新橋 B線" },
-    { audio: "audio/1-銀座線/00 - 117.mp3", title: "銀座カンカン娘", station: "G-09 銀座 A線" },
-    { audio: "audio/1-銀座線/00 - 118.mp3", title: "銀座カンカン娘", station: "G-09 銀座 B線" },
-    { audio: "audio/1-銀座線/00 - 119.mp3", title: "蜜柑色の夢", station: "G-10 京橋 A線" },
-    { audio: "audio/1-銀座線/00 - 120.mp3", title: "雪月花", station: "G-10 京橋 B線" },
-    { audio: "audio/1-銀座線/00 - 121.mp3", title: "お江戸日本橋", station: "G-11 日本橋 A線" },
-    { audio: "audio/1-銀座線/00 - 122.mp3", title: "お江戸日本橋", station: "G-11 日本橋 B線" },
-    { audio: "audio/1-銀座線/00 - 123.mp3", title: "お江戸日本橋", station: "G-12 三越前 A線" },
-    { audio: "audio/1-銀座線/00 - 124.mp3", title: "お江戸日本橋", station: "G-12 三越前 B線" },
-    { audio: "audio/1-銀座線/00 - 125.mp3", title: "お祭りマンボ", station: "G-13 神田 A線" },
-    { audio: "audio/1-銀座線/00 - 126.mp3", title: "お祭りマンボ", station: "G-13 神田 B線" },
-    { audio: "audio/1-銀座線/00 - 127.mp3", title: "オリジナル曲", station: "G-14 末広町 A線" },
-    { audio: "audio/1-銀座線/00 - 128.mp3", title: "オリジナル曲", station: "G-14 末広町 B線" },
-    { audio: "audio/1-銀座線/00 - 129.mp3", title: "オリジナル曲", station: "G-15 上野広小路 A線" },
-    { audio: "audio/1-銀座線/00 - 130.mp3", title: "オリジナル曲", station: "G-15 上野広小路 B線" },
-    { audio: "audio/1-銀座線/00 - 131.mp3", title: "さくら（独唱）", station: "G-16 上野 A線" },
-    { audio: "audio/1-銀座線/00 - 132.mp3", title: "さくら（独唱）", station: "G-16 上野 B線" },
-    { audio: "audio/1-銀座線/00 - 133.mp3", title: "オリジナル曲", station: "G-17 稲荷町 A線" },
-    { audio: "audio/1-銀座線/00 - 134.mp3", title: "オリジナル曲", station: "G-17 稲荷町 B線" },
-    { audio: "audio/1-銀座線/00 - 135.mp3", title: "オリジナル曲", station: "G-18 田原町 A線" },
-    { audio: "audio/1-銀座線/00 - 136.mp3", title: "オリジナル曲", station: "G-18 田原町 B線" },
-    { audio: "audio/1-銀座線/00 - 137.mp3", title: "花", station: "G-19 浅草 1番線" },
-    { audio: "audio/1-銀座線/00 - 138.mp3", title: "花", station: "G-19 浅草 2番線" },
-    { audio: "audio/1-銀座線/00 - 139.mp3", title: "水の都", station: "A線乗降促進" },
-    { audio: "audio/1-銀座線/00 - 140.mp3", title: "小鳥のワルツ", station: "B線乗降促進" },
+    { audio: "audio/1-銀座線/00 - 101.mp3", title: "道はここから", station: "G-01 渋谷 1番線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 102.mp3", title: "アンディーン", station: "G-01 渋谷 2番線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 103.mp3", title: "永遠に続く道", station: "G-02 表参道 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 104.mp3", title: "早瀬", station: "G-02 表参道 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 105.mp3", title: "ようこそ！", station: "G-03 外苑前 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 106.mp3", title: "Ready To Go", station: "G-03 外苑前 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 107.mp3", title: "いつかきっと", station: "G-04 青山一丁目 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 108.mp3", title: "コンシェルジュ", station: "G-04 青山一丁目B 線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 109.mp3", title: "星を探して", station: "G-05 赤坂見附 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 110.mp3", title: "オレンジピール", station: "G-05 赤坂見附 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 111.mp3", title: "オリジナル曲", station: "G-06 溜池山王 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 112.mp3", title: "オリジナル曲", station: "G-06 溜池山王 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 113.mp3", title: "シトラスの香り", station: "G-07 虎ノ門 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 114.mp3", title: "玉紫陽花", station: "G-07 虎ノ門 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 115.mp3", title: "スタートライン", station: "G-08 新橋 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 116.mp3", title: "Fast River", station: "G-08 新橋 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 117.mp3", title: "銀座カンカン娘", station: "G-09 銀座 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 118.mp3", title: "銀座カンカン娘", station: "G-09 銀座 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 119.mp3", title: "蜜柑色の夢", station: "G-10 京橋 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 120.mp3", title: "雪月花", station: "G-10 京橋 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 121.mp3", title: "お江戸日本橋", station: "G-11 日本橋 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 122.mp3", title: "お江戸日本橋", station: "G-11 日本橋 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 123.mp3", title: "お江戸日本橋", station: "G-12 三越前 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 124.mp3", title: "お江戸日本橋", station: "G-12 三越前 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 125.mp3", title: "お祭りマンボ", station: "G-13 神田 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 126.mp3", title: "お祭りマンボ", station: "G-13 神田 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 127.mp3", title: "オリジナル曲", station: "G-14 末広町 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 128.mp3", title: "オリジナル曲", station: "G-14 末広町 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 129.mp3", title: "オリジナル曲", station: "G-15 上野広小路 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 130.mp3", title: "オリジナル曲", station: "G-15 上野広小路 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 131.mp3", title: "さくら（独唱）", station: "G-16 上野 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 132.mp3", title: "さくら（独唱）", station: "G-16 上野 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 133.mp3", title: "オリジナル曲", station: "G-17 稲荷町 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 134.mp3", title: "オリジナル曲", station: "G-17 稲荷町 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 135.mp3", title: "オリジナル曲", station: "G-18 田原町 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 136.mp3", title: "オリジナル曲", station: "G-18 田原町 B線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 137.mp3", title: "花", station: "G-19 浅草 1番線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 138.mp3", title: "花", station: "G-19 浅草 2番線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 139.mp3", title: "水の都", station: "A線乗降促進", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 140.mp3", title: "小鳥のワルツ", station: "B線乗降促進", line: "銀座線"},
 
-    { audio: "audio/2-丸ノ内線/201.mp3", title: "フランソワ", station: "M-25 池袋 1番線" },
-    { audio: "audio/2-丸ノ内線/202.mp3", title: "キラリトレイン", station: "M-25 池袋 2番線" },
-    { audio: "audio/2-丸ノ内線/203.mp3", title: "もうすぐ扉が閉まります", station: "M-24 新大塚 A線" },
-    { audio: "audio/2-丸ノ内線/204.mp3", title: "マウンテン", station: "M-22 後楽園 A線" },
-    { audio: "audio/2-丸ノ内線/205.mp3", title: "素敵にハート", station: "M-21 本郷三丁目 A線" },
-    { audio: "audio/2-丸ノ内線/206.mp3", title: "ハートレール", station: "M-20 御茶ノ水 A線" },
-    { audio: "audio/2-丸ノ内線/207.mp3", title: "Safety", station: "M-19 淡路町 A線" },
-    { audio: "audio/2-丸ノ内線/208.mp3", title: "快適乗降", station: "M-18 大手町 A線" },
-    { audio: "audio/2-丸ノ内線/209.mp3", title: "らくらく乗降", station: "M-17 東京 A線" },
-    { audio: "audio/2-丸ノ内線/210.mp3", title: "明日の扉", station: "M-16 銀座 A線" },
-    { audio: "audio/2-丸ノ内線/211.mp3", title: "Tokyo Line", station: "M-15 霞ヶ関 A線" },
-    { audio: "audio/2-丸ノ内線/212.mp3", title: "ランダムショット", station: "M-14 国会議事堂前 A線" },
-    { audio: "audio/2-丸ノ内線/213.mp3", title: "メトロタウン", station: "M-13 赤坂見附 A線" },
-    { audio: "audio/2-丸ノ内線/214.mp3", title: "駅ウォーキング", station: "M-12 四ツ谷 A線" },
-    { audio: "audio/2-丸ノ内線/215.mp3", title: "トレインライト", station: "M-11 四谷三丁目 A線" },
-    { audio: "audio/2-丸ノ内線/216.mp3", title: "レインボウ電車", station: "M-10 新宿御苑前 A線" },
-    { audio: "audio/2-丸ノ内線/217.mp3", title: "ステーションベル", station: "M-09 新宿三丁目 A線" },
-    { audio: "audio/2-丸ノ内線/218.mp3", title: "ミツバチの兄弟", station: "M-08 新宿 A線" },
-    { audio: "audio/2-丸ノ内線/219.mp3", title: "ラッキーカード", station: "M-07 西新宿 A線" },
-    { audio: "audio/2-丸ノ内線/220.mp3", title: "Endless Trip", station: "M-06 中野坂上 A線" },
-    { audio: "audio/2-丸ノ内線/221.mp3", title: "Comical Train", station: "M-05 新中野 A線" },
-    { audio: "audio/2-丸ノ内線/222.mp3", title: "羽をひろげて", station: "M-04 東高円寺 A線" },
-    { audio: "audio/2-丸ノ内線/223.mp3", title: "Blue Sky", station: "M-03 新高円寺 A線" },
-    { audio: "audio/2-丸ノ内線/224.mp3", title: "ひかりの反射", station: "M-02 南阿佐ヶ谷 A線" },
-    { audio: "audio/2-丸ノ内線/225.mp3", title: "星の贈りもの", station: "M-01 荻窪 1番線" },
-    { audio: "audio/2-丸ノ内線/226.mp3", title: "ハート畑", station: "M-01 荻窪 2番線" },
-    { audio: "audio/2-丸ノ内線/227.mp3", title: "夢行きステップ", station: "M-02 南阿佐ヶ谷 B線" },
-    { audio: "audio/2-丸ノ内線/228.mp3", title: "ハートスタイル", station: "M-03 新高円寺 B線" },
-    { audio: "audio/2-丸ノ内線/229.mp3", title: "駅にサンキュー", station: "M-04 東高円寺 B線" },
-    { audio: "audio/2-丸ノ内線/230.mp3", title: "スイートムーン", station: "M-05 新中野 B線" },
-    { audio: "audio/2-丸ノ内線/231.mp3", title: "角を曲がれば", station: "M-06 中野坂上 B線" },
-    { audio: "audio/2-丸ノ内線/232.mp3", title: "ピアノマン", station: "M-07 西新宿 B線" },
-    { audio: "audio/2-丸ノ内線/233.mp3", title: "きらめく小川", station: "M-08 新宿 B線" },
-    { audio: "audio/2-丸ノ内線/234.mp3", title: "ひとやすみ", station: "M-09 新宿三丁目 B線" },
-    { audio: "audio/2-丸ノ内線/235.mp3", title: "駅メモリー", station: "M-10 新宿御苑前 B線" },
-    { audio: "audio/2-丸ノ内線/236.mp3", title: "cielo azur（碧空）", station: "M-11 四谷三丁目 B線" },
-    { audio: "audio/2-丸ノ内線/237.mp3", title: "ヒーリング電車", station: "M-12 四ツ谷 B線" },
-    { audio: "audio/2-丸ノ内線/238.mp3", title: "レインシャワー", station: "M-13 赤坂見附 B線" },
-    { audio: "audio/2-丸ノ内線/239.mp3", title: "東京旅姿", station: "M-14 国会議事堂前 B線" },
-    { audio: "audio/2-丸ノ内線/240.mp3", title: "スマイル電車", station: "M-15 霞ヶ関 B線" },
-    { audio: "audio/2-丸ノ内線/241.mp3", title: "小鳥の行進", station: "M-16 銀座 B線" },
-    { audio: "audio/2-丸ノ内線/242.mp3", title: "夢心地", station: "M-17 東京 B線" },
-    { audio: "audio/2-丸ノ内線/243.mp3", title: "潤い電車", station: "M-18 大手町 B線" },
-    { audio: "audio/2-丸ノ内線/244.mp3", title: "駅スイート", station: "M-19 淡路町 B線" },
-    { audio: "audio/2-丸ノ内線/245.mp3", title: "ジェントルトレイン", station: "M-20 御茶ノ水 B線" },
-    { audio: "audio/2-丸ノ内線/246.mp3", title: "サニーサイドステーション", station: "M-21 本郷三丁目 B線" },
-    { audio: "audio/2-丸ノ内線/247.mp3", title: "サークルゲーム", station: "M-22 後楽園 B線" },
-    { audio: "audio/2-丸ノ内線/248.mp3", title: "ドリーム駅", station: "M-24 新大塚 B線" },
-    { audio: "audio/2-丸ノ内線/249.mp3", title: "ベリル", station: "Mb-06 中野坂上 A線" },
-    { audio: "audio/2-丸ノ内線/250.mp3", title: "落ち葉の舗道", station: "Mb-05 中野新橋 A線" },
-    { audio: "audio/2-丸ノ内線/251.mp3", title: "スタイルブック", station: "Mb-04 中野富士見町 A線" },
-    { audio: "audio/2-丸ノ内線/252.mp3", title: "スペシャルゲスト", station: "Mb-03 方南町 1番線" },
-    { audio: "audio/2-丸ノ内線/253.mp3", title: "希望の電車", station: "Mb-03 方南町 2番線" },
-    { audio: "audio/2-丸ノ内線/254.mp3", title: "コサージュ", station: "Mb-04 中野富士見町 B線" },
-    { audio: "audio/2-丸ノ内線/255.mp3", title: "ロッキン・メトロ", station: "Mb-05 中野新橋 B線" },
-    { audio: "audio/2-丸ノ内線/256.mp3", title: "ラッキーボーイ", station: "Mb-06 中野坂上 B線" },
-    { audio: "audio/2-丸ノ内線/257.mp3", title: "街並みはるか", station: "乗降促進 A線" },
-    { audio: "audio/2-丸ノ内線/258.mp3", title: "舞フラワー", station: "乗降促進 B線" }
+    { audio: "audio/2-丸ノ内線/201.mp3", title: "フランソワ", station: "M-25 池袋 1番線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/202.mp3", title: "キラリトレイン", station: "M-25 池袋 2番線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/203.mp3", title: "もうすぐ扉が閉まります", station: "M-24 新大塚 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/204.mp3", title: "マウンテン", station: "M-22 後楽園 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/205.mp3", title: "素敵にハート", station: "M-21 本郷三丁目 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/206.mp3", title: "ハートレール", station: "M-20 御茶ノ水 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/207.mp3", title: "Safety", station: "M-19 淡路町 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/208.mp3", title: "快適乗降", station: "M-18 大手町 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/209.mp3", title: "らくらく乗降", station: "M-17 東京 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/210.mp3", title: "明日の扉", station: "M-16 銀座 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/211.mp3", title: "Tokyo Line", station: "M-15 霞ヶ関 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/212.mp3", title: "ランダムショット", station: "M-14 国会議事堂前 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/213.mp3", title: "メトロタウン", station: "M-13 赤坂見附 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/214.mp3", title: "駅ウォーキング", station: "M-12 四ツ谷 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/215.mp3", title: "トレインライト", station: "M-11 四谷三丁目 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/216.mp3", title: "レインボウ電車", station: "M-10 新宿御苑前 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/217.mp3", title: "ステーションベル", station: "M-09 新宿三丁目 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/218.mp3", title: "ミツバチの兄弟", station: "M-08 新宿 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/219.mp3", title: "ラッキーカード", station: "M-07 西新宿 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/220.mp3", title: "Endless Trip", station: "M-06 中野坂上 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/221.mp3", title: "Comical Train", station: "M-05 新中野 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/222.mp3", title: "羽をひろげて", station: "M-04 東高円寺 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/223.mp3", title: "Blue Sky", station: "M-03 新高円寺 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/224.mp3", title: "ひかりの反射", station: "M-02 南阿佐ヶ谷 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/225.mp3", title: "星の贈りもの", station: "M-01 荻窪 1番線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/226.mp3", title: "ハート畑", station: "M-01 荻窪 2番線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/227.mp3", title: "夢行きステップ", station: "M-02 南阿佐ヶ谷 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/228.mp3", title: "ハートスタイル", station: "M-03 新高円寺 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/229.mp3", title: "駅にサンキュー", station: "M-04 東高円寺 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/230.mp3", title: "スイートムーン", station: "M-05 新中野 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/231.mp3", title: "角を曲がれば", station: "M-06 中野坂上 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/232.mp3", title: "ピアノマン", station: "M-07 西新宿 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/233.mp3", title: "きらめく小川", station: "M-08 新宿 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/234.mp3", title: "ひとやすみ", station: "M-09 新宿三丁目 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/235.mp3", title: "駅メモリー", station: "M-10 新宿御苑前 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/236.mp3", title: "cielo azur（碧空）", station: "M-11 四谷三丁目 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/237.mp3", title: "ヒーリング電車", station: "M-12 四ツ谷 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/238.mp3", title: "レインシャワー", station: "M-13 赤坂見附 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/239.mp3", title: "東京旅姿", station: "M-14 国会議事堂前 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/240.mp3", title: "スマイル電車", station: "M-15 霞ヶ関 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/241.mp3", title: "小鳥の行進", station: "M-16 銀座 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/242.mp3", title: "夢心地", station: "M-17 東京 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/243.mp3", title: "潤い電車", station: "M-18 大手町 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/244.mp3", title: "駅スイート", station: "M-19 淡路町 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/245.mp3", title: "ジェントルトレイン", station: "M-20 御茶ノ水 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/246.mp3", title: "サニーサイドステーション", station: "M-21 本郷三丁目 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/247.mp3", title: "サークルゲーム", station: "M-22 後楽園 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/248.mp3", title: "ドリーム駅", station: "M-24 新大塚 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/249.mp3", title: "ベリル", station: "Mb-06 中野坂上 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/250.mp3", title: "落ち葉の舗道", station: "Mb-05 中野新橋 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/251.mp3", title: "スタイルブック", station: "Mb-04 中野富士見町 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/252.mp3", title: "スペシャルゲスト", station: "Mb-03 方南町 1番線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/253.mp3", title: "希望の電車", station: "Mb-03 方南町 2番線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/254.mp3", title: "コサージュ", station: "Mb-04 中野富士見町 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/255.mp3", title: "ロッキン・メトロ", station: "Mb-05 中野新橋 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/256.mp3", title: "ラッキーボーイ", station: "Mb-06 中野坂上 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/257.mp3", title: "街並みはるか", station: "乗降促進 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/258.mp3", title: "舞フラワー", station: "乗降促進 B線", line: "丸ノ内線"}
   ];
 
   let questions = [];
   let current = 0;
   let audio = new Audio();
+  let filteredData = [];
 
   function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -177,6 +185,33 @@
     const shuffled = shuffle([...data]);
     questions = shuffled.slice(0, Math.min(count, data.length));
     current = 0;
+
+    loadQuestion();
+  }
+
+  function startGame(num) {
+    const selectedLine = document.getElementById("lineSelect").value;
+
+    // 路線でフィルター
+    if (selectedLine === "all") {
+      filteredData = [...data];
+    } else {
+      filteredData = data.filter(d => d.line === selectedLine);
+    }
+
+    // シャッフル
+    filteredData = filteredData.sort(() => Math.random() - 0.5);
+
+    // 出題数制限
+    if (num !== 999) {
+      filteredData = filteredData.slice(0, num);
+    }
+
+    currentIndex = 0;
+    quizData = filteredData;
+
+    document.getElementById("setup").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
 
     loadQuestion();
   }

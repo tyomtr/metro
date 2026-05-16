@@ -8,39 +8,288 @@
       font-family: sans-serif;
       text-align: center;
       padding: 40px;
+      min-height: 100vh;
+      transition: background 0.5s ease;
     }
-    .hidden { display: none; }
+
+    body.setup-mode {
+      background:
+      linear-gradient(
+       rgba(255,255,255,0.4),
+       rgba(245,247,250,0.4)
+      ),
+      url("image/metro.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    body.quiz-mode {
+      background-image: url("image/metro.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .hidden {
+     display: none !important;
+    }
+
     button {
       font-size: 20px;
       padding: 12px 24px;
       margin: 10px;
     }
+
     .answer {
-      font-size: 30px;
-      margin: 20px;
-      font-weight: bold;
+      background: rgba(255,255,255,0.75);
+      border-radius: 20px;
+      padding: 20px;
+      display: inline-block;
+
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .answer-title {
+     font-size: 32px;
+     font-weight: bold;
+     margin-bottom: 12px;
     }
 
     .answer small {
      font-size: 25px;
-      color: #666;
     }
 
+    .ginza {
+      color: #f39700;
+    }
+    .marunouchi {
+      color: #e60012;
+    }
+    .hibiya{
+      color: #BAB7AC;
+    }
+
+    .line-options {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+
+   .line-card {
+    width: 72px;
+    height: 72px;
+    
+    border-radius: 50%;
+    background: rgba(255,255,255,0.75);
+    cursor: pointer;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+    
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+    
+    transform: scale(0.9);
+    opacity: 0.65;
+    }
+
+    .line-card input {
+      display: none;
+    }
+
+    .line-card span {
+      display: block;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+    
+    .line-card img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      transition: all 0.2s ease;
+    }
+    
+    .line-card:has(input:checked) {
+      
+      transform: scale(1.08);
+      opacity: 1;
+      
+      background: rgba(255,255,255,0.95);
+      
+      box-shadow:
+      0 8px 24px rgba(0,0,0,0.18);
+    }
+
+    .line-card:hover {
+      transform: scale(1.02);
+    }
+
+    /* 解答時の背景色 */
+    body.ginza-bg {
+      background:
+        linear-gradient(rgba(243,151,0,0.25), rgba(243,151,0,0.45)),
+        url("image/metro.png");
+     background-size: cover;
+     background-position: center center;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+    }
+
+    body.marunouchi-bg {
+      background:
+        linear-gradient(rgba(230,0,18,0.25), rgba(230,0,18,0.45)),
+        url("image/metro.png");
+     background-size: cover;
+     background-position: center center;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+    }
+
+    body.hibiya-bg {
+      background:
+        linear-gradient(rgba(190,186,177,0.25), rgba(190,186,177,0.45)),
+        url("image/metro.png");
+     background-size: cover;
+     background-position: center center;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+    }
+
+    #answerButtons {
+      margin-top: 20px;
+    }
+
+    #answerButtons button {
+      display: inline-block;
+    }
+
+    #contact {
+      margin-top: 30px;
+    }
+
+    #contact a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .selected-correct {
+      background: #4caf50;
+      color: white;
+    }
+
+    .selected-wrong {
+      background: #f44336;
+      color: white;
+    }
+
+    button:disabled {
+      opacity: 1;
+      cursor: default;
+    }
+
+    .score-detail {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #444;
+    }
+    
+    .score-point {
+      font-size: 72px;
+      font-weight: bold;
+      background: linear-gradient(90deg,#00A9E0,#003057);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    #score {
+      background: rgba(255,255,255,0.75);
+      border-radius: 24px;
+      padding: 30px;
+      display: inline-block;
+      min-width: 280px;
+    }
+
+    #result button {
+      display: block;
+      margin: 40px auto 20px auto;
+    }
+
+    #audioCredit {
+      position: fixed;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
+    #audioCredit a {
+      color: rgba(0,0,0,0.6);
+      text-decoration: none;
+    }
   </style>
 </head>
-<body>
+
+<body class="setup-mode">
 
   <!-- 設定画面 -->
   <div id="setup">
     <h1>東京メトロ 発車サイン音クイズ</h1>
     <h2>出題路線・出題数を選択</h2>
 
-    <select id="lineSelect">
-      <option value="all">すべて</option>
-      <option value="丸ノ内線">丸ノ内線</option>
-      <option value="銀座線">銀座線</option>
-    </select>
-    <br><br>
+    <div class="line-options">
+      <label class="line-card">
+        <input type="checkbox" name="lineCheck" value="銀座線" checked>
+          <img
+          class="line-image"
+          src="image/G.png"
+          data-on="image/G.png"
+          data-off="image/G_bw.png"
+          alt="銀座線"
+          >
+      </label> 
+
+      <label class="line-card">
+        <input type="checkbox" name="lineCheck" value="丸ノ内線" checked>
+          <img
+          class="line-image"
+          src="image/M.png"
+          data-on="image/M.png"
+          data-off="image/M_bw.png"
+          alt="丸ノ内線"
+          >
+      </label> 
+      
+      <label class="line-card">
+        <input type="checkbox" name="lineCheck" value="日比谷線" checked>
+          <img
+          class="line-image"
+          src="image/H.png"
+          data-on="image/H.png"
+          data-off="image/H_bw.png"
+          alt="日比谷線"
+          >
+      </label> 
+
+    </div>
+  <br>
+
     <button onclick="startGame(5)">5問</button>
     <button onclick="startGame(10)">10問</button>
     <button onclick="startGame(999)">すべて</button>
@@ -49,16 +298,30 @@
   <!-- 出題画面 -->
   <div id="quiz" class="hidden">
     <h2 id="progress"></h2>
-    <button onclick="playAudio()">▶ 再生</button>
+    <button id="showAnswerBtn" onclick="showAnswer()">解答へ</button>
     <div id="answer" class="answer hidden"></div>
-    <button id="nextBtn" class="hidden" onclick="nextQuestion()">次へ</button>
-    <button id="endBtn" onclick="endGame()">終了</button>
+    <div id="judgeButtons" class="hidden">
+      <button id="correctBtn" onclick="judgeAnswer(true)">正解</button>
+      <button id="wrongBtn" onclick="judgeAnswer(false)">不正解</button>
+    </div>
+    <div id="answerButtons" class="hidden">
+      <button id="playBtn" onclick="playAudio()">▶ 再生</button>
+      <button id="nextBtn" onclick="nextQuestion()">次へ</button>
+      <button id="endBtn" onclick="endGame()">終了</button>
+    </div>
+    <div id="audioCredit">
+      ※音源：鉄道モバイル
+      <a href="https://www.te2do.jp/" target="_blank">https://www.te2do.jp/</a>
+    </div>
   </div>
 
   <!-- 結果画面 -->
   <div id="result" class="hidden">
-    <h2>おつかれさま！</h2>
+    <div id="score"></div>
     <button onclick="location.reload()">もう一度</button>
+    <div id="contact">
+    <a href="https://forms.gle/qT1Zrj9uFpmAw79J8" target="_blank">お問い合わせ・不具合報告はこちら</a>
+    </div>
   </div>
 
 <script>
@@ -71,7 +334,7 @@
     { audio: "audio/1-銀座線/00 - 105.mp3", title: "ようこそ！", station: "G-03 外苑前 A線", line: "銀座線"},
     { audio: "audio/1-銀座線/00 - 106.mp3", title: "Ready To Go", station: "G-03 外苑前 B線", line: "銀座線"},
     { audio: "audio/1-銀座線/00 - 107.mp3", title: "いつかきっと", station: "G-04 青山一丁目 A線", line: "銀座線"},
-    { audio: "audio/1-銀座線/00 - 108.mp3", title: "コンシェルジュ", station: "G-04 青山一丁目B 線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 108.mp3", title: "コンシェルジュ", station: "G-04 青山一丁目 B線", line: "銀座線"},
     { audio: "audio/1-銀座線/00 - 109.mp3", title: "星を探して", station: "G-05 赤坂見附 A線", line: "銀座線"},
     { audio: "audio/1-銀座線/00 - 110.mp3", title: "オレンジピール", station: "G-05 赤坂見附 B線", line: "銀座線"},
     { audio: "audio/1-銀座線/00 - 111.mp3", title: "オリジナル曲", station: "G-06 溜池山王 A線", line: "銀座線"},
@@ -162,116 +425,324 @@
     { audio: "audio/2-丸ノ内線/255.mp3", title: "ロッキン・メトロ", station: "Mb-05 中野新橋 B線", line: "丸ノ内線"},
     { audio: "audio/2-丸ノ内線/256.mp3", title: "ラッキーボーイ", station: "Mb-06 中野坂上 B線", line: "丸ノ内線"},
     { audio: "audio/2-丸ノ内線/257.mp3", title: "街並みはるか", station: "乗降促進 A線", line: "丸ノ内線"},
-    { audio: "audio/2-丸ノ内線/258.mp3", title: "舞フラワー", station: "乗降促進 B線", line: "丸ノ内線"}
+    { audio: "audio/2-丸ノ内線/258.mp3", title: "舞フラワー", station: "乗降促進 B線", line: "丸ノ内線"},
+    { audio: "audio/3-日比谷線/301.mp3", title: "桜の川堤", station: "H-21 南千住 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/302.mp3", title: "タイムマシン", station: "H-20 三ノ輪 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/303.mp3", title: "銀箭", station: "H-19 入谷 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/304.mp3", title: "Toy garden", station: "H-18 上野 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/305.mp3", title: "アッシュグレイ", station: "H-17 仲御徒町 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/306.mp3", title: "恋するフォーチュンクッキー", station: "H-16 秋葉原 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/307.mp3", title: "いつもの店で", station: "H-15 小伝馬町 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/308.mp3", title: "そぞろ歩き", station: "H-14 人形町 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/309.mp3", title: "スピネル", station: "H-13 茅場町 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/310.mp3", title: "黄金虫のワルツ", station: "H-12 八丁堀 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/311.mp3", title: "オールマイティー", station: "H-11 築地 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/312.mp3", title: "桃山", station: "H-10 東銀座 A線", line: "日比谷線"},
+    {audio: "audio/3-日比谷線/313.mp3", title: "銀座の恋の物語", station: "H-09 銀座 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/314.mp3", title: "銀杏の下で", station: "H-08 日比谷 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/315.mp3", title: "明日への序章", station: "H-07 霞ヶ関 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/316.mp3", title: "輝く都市", station: "H-06 虎ノ門ヒルズ A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/317.mp3", title: "昇って降りて", station: "H-05 神谷町 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/318.mp3", title: "セレンディピティ", station: "H-04 六本木 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/319.mp3", title: "昼下がりのテラス", station: "H-03 広尾 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/320.mp3", title: "アルテミス", station: "H-02 恵比寿 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/321.mp3", title: "Sparkling Road", station: "H-02 恵比寿 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/322.mp3", title: "希望の地へ", station: "H-03 広尾 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/323.mp3", title: "patio", station: "H-04 六本木 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/324.mp3", title: "Lovely Morning", station: "H-05 神谷町 B線", line: "日比谷線"},
+    {audio: "audio/3-日比谷線/325.mp3", title: "夏雲", station: "H-06 虎ノ門ヒルズ B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/326.mp3", title: "今日も一日", station: "H-07 霞ヶ関 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/327.mp3", title: "公園日和", station: "H-08 日比谷 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/328.mp3", title: "銀座の恋の物語", station: "H-09 銀座 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/329.mp3", title: "ノスタルジア", station: "H-10 東銀座 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/330.mp3", title: "潮騒", station: "H-11 築地 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/331.mp3", title: "煌めき", station: "H-12 八丁堀 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/332.mp3", title: "キャノピー", station: "H-13 茅場町 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/333.mp3", title: "御伽草子", station: "H-14 人形町 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/334.mp3", title: "向こう岸", station: "H-15 小伝馬町 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/335.mp3", title: "恋するフォーチュンクッキー", station: "H-16 秋葉原 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/336.mp3", title: "ゆれる袂", station: "H-17 仲御徒町 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/337.mp3", title: "さあ、行くよ！", station: "H-18 上野 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/338.mp3", title: "花びら", station: "H-19 入谷 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/339.mp3", title: "星まつり", station: "H-20 三ノ輪 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/340.mp3", title: "プリズム", station: "H-21 南千住 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/341.mp3", title: "メトロの休日", station: "乗降促進 A線", line: "日比谷線"},
+    {audio: "audio/3-日比谷線/342.mp3", title: "七色の翼", station: "乗降促進 B線", line: "日比谷線"}
   ];
+
+  const lineColors = {
+    "銀座線": "ginza",
+    "丸ノ内線": "marunouchi",
+    "日比谷線": "hibiya"
+  };
+
+  const lineBackgrounds = {
+  "銀座線": "ginza-bg",
+  "丸ノ内線": "marunouchi-bg",
+  "日比谷線": "hibiya-bg"
+  };
 
   let questions = [];
   let current = 0;
   let audio = new Audio();
-  let filteredData = [];
+  const rightSound = new Audio("audio/right.mp3");
+  const wrongSound = new Audio("audio/wrong.mp3");
+  let correctCount = 0;
+  let answeredCount = 0;
+  let answered = false;
 
   function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
-  return array;
-}
+
+  function playAudio() {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.play();
+  }
 
   function startGame(count) {
-    document.getElementById("setup").classList.add("hidden");
-    document.getElementById("quiz").classList.remove("hidden");
+    correctCount = 0;
+    answeredCount = 0;
+    answered = false;
 
-    const shuffled = shuffle([...data]);
-    questions = shuffled.slice(0, Math.min(count, data.length));
+    const selectedLines = Array.from(
+      document.querySelectorAll('input[name="lineCheck"]:checked')
+    ).map(input => input.value);
+
+    if (selectedLines.length === 0) {
+      alert("出題路線を1つ以上選択してください");
+      return;
+    }
+
+    const filteredData = data.filter(q => selectedLines.includes(q.line));
+    const shuffled = shuffle([...filteredData]);
+
+    questions = shuffled.slice(0, Math.min(count, shuffled.length));
     current = 0;
-
-    loadQuestion();
-  }
-
-  function startGame(num) {
-    const selectedLine = document.getElementById("lineSelect").value;
-
-    // 路線でフィルター
-    if (selectedLine === "all") {
-      filteredData = [...data];
-    } else {
-      filteredData = data.filter(d => d.line === selectedLine);
-    }
-
-    // シャッフル
-    filteredData = filteredData.sort(() => Math.random() - 0.5);
-
-    // 出題数制限
-    if (num !== 999) {
-      filteredData = filteredData.slice(0, num);
-    }
-
-    currentIndex = 0;
-    quizData = filteredData;
+    correctCount = 0;
 
     document.getElementById("setup").classList.add("hidden");
     document.getElementById("quiz").classList.remove("hidden");
+
+    document.body.classList.remove("setup-mode");
+    document.body.classList.add("quiz-mode");
 
     loadQuestion();
   }
 
   function loadQuestion() {
+    document.getElementById("judgeButtons").classList.add("hidden");
+    document.getElementById("answerButtons").classList.add("hidden");
+    document.getElementById("answer").classList.add("hidden");
+    document.getElementById("answer").innerHTML = "";
+    document.getElementById("showAnswerBtn").classList.remove("hidden");
+
+    answered = false;
+    
+    document.getElementById("correctBtn").disabled = false;
+    document.getElementById("wrongBtn").disabled = false;
+    
+    document.getElementById("correctBtn").classList.remove("selected-correct");
+    document.getElementById("wrongBtn").classList.remove("selected-wrong");
+    
+    document.body.classList.remove(
+    "ginza-bg",
+    "marunouchi-bg",
+    "hibiya-bg"
+    );
+
+    document.body.classList.add("setup-mode");
+    document.body.classList.remove("quiz-mode");
+
     document.getElementById("answer").classList.add("hidden");
     document.getElementById("nextBtn").classList.add("hidden");
-
+    
     document.getElementById("progress").textContent =
-      `問題 ${current + 1} / ${questions.length}`;
+    `${questions.length}問中 ${current + 1}問目`;
 
     audio.src = questions[current].audio;
 
-    audio.onended = () => {
-      const q = questions[current];
-
-      document.getElementById("answer").innerHTML =
-      `${q.title}<br><small>${q.station}</small>`;
-
-      document.getElementById("answer").classList.remove("hidden");
-      document.getElementById("nextBtn").classList.remove("hidden");
-    };
+    audio.onended = showAnswer;
 
     const endBtn = document.getElementById("endBtn");
+
     if (current === questions.length - 1) {
-    endBtn.classList.add("hidden");   // 最終問題 → 非表示
+      document.getElementById("endBtn").classList.add("hidden");
     } else {
-    endBtn.classList.remove("hidden"); // それ以外 → 表示
-    }  
-
+      document.getElementById("endBtn").classList.remove("hidden");
+    }
     audio.play();
   }
 
-  function playAudio() {
-    audio.play();
+function nextQuestion() {
+  audio.pause();
+  audio.currentTime = 0;
+
+  current++;
+
+  if (current >= questions.length) {
+    const score = answeredCount === 0
+      ? 0
+      : Math.round((correctCount / answeredCount) * 100);
+
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    document.getElementById("score").innerHTML =
+      `${answeredCount}問採点 / ${questions.length}問中<br>
+       ${correctCount}問正解<br>
+       得点：${score}点`;
+
+    return;
   }
 
-  function nextQuestion() {
-    current++;
+  loadQuestion();
+}
 
-    if (current >= questions.length) {
-      document.getElementById("quiz").classList.add("hidden");
-      document.getElementById("result").classList.remove("hidden");
-      return;
+  function showAnswerNow() {
+    audio.pause();
+
+    const q = questions[current];
+
+    const lineClass = lineColors[q.line] || "";
+    const bgClass = lineBackgrounds[q.line] || "";
+
+    document.body.classList.remove("setup-mode");
+    document.body.classList.add("quiz-mode");
+
+    document.body.classList.remove(
+      "ginza-bg",
+      "marunouchi-bg",
+      "hibiya-bg"
+    );
+
+    document.body.classList.add(bgClass);
+
+    document.getElementById("answer").innerHTML =
+    `<div class="answer-title">${q.title}</div>
+     <small class="${lineClass}">${q.station}</small>`;
+
+    document.getElementById("answer").classList.remove("hidden");
+
+    document.getElementById("answerButtons").classList.remove("hidden");
+    document.getElementById("playBtn").classList.remove("hidden");
+    document.getElementById("nextBtn").classList.remove("hidden");
+
+    if (current === questions.length - 1) {
+      document.getElementById("endBtn").classList.add("hidden");
+    } else {
+      document.getElementById("endBtn").classList.remove("hidden");
     }
 
-    loadQuestion();
+    document.getElementById("showAnswerBtn").classList.add("hidden");
+
+  }
+
+  function showAnswer() {
+    audio.pause();
+
+    const q = questions[current];
+    const lineClass = lineColors[q.line] || "";
+    const bgClass = lineBackgrounds[q.line] || "";
+
+    document.body.classList.remove("setup-mode");
+    document.body.classList.add("quiz-mode");
+
+    document.body.classList.remove("ginza-bg", "marunouchi-bg", "hibiya-bg");
+    document.body.classList.add(bgClass);
+
+    document.getElementById("answer").innerHTML =
+    `<div class="answer-title">${q.title}</div>
+     <small class="${lineClass}">${q.station}</small>`;
+
+    document.getElementById("answer").classList.remove("hidden");
+    document.getElementById("answerButtons").classList.remove("hidden");
+    document.getElementById("playBtn").classList.remove("hidden");
+    document.getElementById("nextBtn").classList.remove("hidden");
+    document.getElementById("showAnswerBtn").classList.add("hidden");
+
+    document.getElementById("judgeButtons").classList.remove("hidden");
+    answered = false;
+
+    if (current === questions.length - 1) {
+      document.getElementById("nextBtn").classList.add("hidden");
+      document.getElementById("endBtn").classList.remove("hidden");
+    } else {
+      document.getElementById("nextBtn").classList.remove("hidden");
+      document.getElementById("endBtn").classList.remove("hidden");
+    }
+  }
+
+  function judgeAnswer(isCorrect) {
+
+    if (answered) return;
+
+    answered = true;
+    answeredCount++;
+
+    const correctBtn = document.getElementById("correctBtn");
+    const wrongBtn = document.getElementById("wrongBtn");
+
+    if (isCorrect) {
+      correctCount++;
+      rightSound.currentTime = 0;
+      rightSound.play();
+      correctBtn.classList.add("selected-correct");
+    } else {
+      wrongSound.currentTime = 0;
+      wrongSound.play();
+      wrongBtn.classList.add("selected-wrong");
+    }
+    correctBtn.disabled = true;
+    wrongBtn.disabled = true;
   }
 
   function endGame() {
-    if (!confirm("途中で終了しますか？")) return;
+  audio.pause();
+  audio.currentTime = 0;
+  
+  const score = answeredCount === 0
+  ? 0
+  : Math.round((correctCount / answeredCount) * 100);
 
-    // 再生中の音声を止める
-    audio.pause();
-    audio.currentTime = 0;
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
 
-    // 画面切り替え
-    document.getElementById("quiz").classList.add("hidden");
-    document.getElementById("result").classList.remove("hidden");
-}
+  document.getElementById("score").innerHTML =
+    `
+    <div class="score-detail">
+        ${questions.length}問中${answeredCount}問採点 ${correctCount}問正解
+    </div>
+    
+    <div class="score-point">
+      ${score}点
+    </div>
+    `;
+  }
+
+document.querySelectorAll('.line-card input').forEach(input => {
+
+  const img = input.parentElement.querySelector('.line-image');
+
+  function updateImage() {
+    img.src = input.checked
+      ? img.dataset.on
+      : img.dataset.off;
+  }
+
+  // 初期状態
+  updateImage();
+
+  // クリック時
+  input.addEventListener('change', updateImage);
+
+});
+
 </script>
 
 </body>

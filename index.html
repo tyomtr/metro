@@ -73,9 +73,11 @@
     .hibiya{
       color: #BAB7AC;
     }
-
     .tozai{
       color: #00A7DB;
+    }
+    .chiyoda{
+      color: #00B982;
     }
 
     .line-options {
@@ -177,6 +179,19 @@
       background:
         linear-gradient(
           rgba(0, 167, 219, 0.18), rgba(0, 167, 219, 0.35)),
+        url("image/metro.png");
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    body.chiyoda-bg {
+      background:
+        linear-gradient(
+          rgba(0, 185, 130, 0.18), rgba(0, 185, 130, 0.35)
+        ),
         url("image/metro.png");
 
       background-size: cover;
@@ -325,6 +340,17 @@
           >
       </label>
 
+      <label class="line-card">
+        <input type="checkbox" name="lineCheck" value="千代田線" checked>
+          <img
+          class="line-image"
+          src="image/C.png"
+          data-on="image/C.png"
+          data-off="image/C_bw.png"
+          alt="千代田線"
+          >
+      </label>
+
     </div>
   <br>
 
@@ -403,8 +429,8 @@
     { audio: "audio/1-銀座線/00 - 136.mp3", title: "オリジナル曲", station: "G-18 田原町 B線", line: "銀座線"},
     { audio: "audio/1-銀座線/00 - 137.mp3", title: "花", station: "G-19 浅草 1番線", line: "銀座線"},
     { audio: "audio/1-銀座線/00 - 138.mp3", title: "花", station: "G-19 浅草 2番線", line: "銀座線"},
-    { audio: "audio/1-銀座線/00 - 139.mp3", title: "水の都", station: "A線乗降促進", line: "銀座線"},
-    { audio: "audio/1-銀座線/00 - 140.mp3", title: "小鳥のワルツ", station: "B線乗降促進", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 139.mp3", title: "水の都", station: "銀座線 乗降促進 A線", line: "銀座線"},
+    { audio: "audio/1-銀座線/00 - 140.mp3", title: "小鳥のワルツ", station: "銀座線 乗降促進 B線", line: "銀座線"},
 
     { audio: "audio/2-丸ノ内線/201.mp3", title: "フランソワ", station: "M-25 池袋 1番線", line: "丸ノ内線"},
     { audio: "audio/2-丸ノ内線/202.mp3", title: "キラリトレイン", station: "M-25 池袋 2番線", line: "丸ノ内線"},
@@ -462,8 +488,9 @@
     { audio: "audio/2-丸ノ内線/254.mp3", title: "コサージュ", station: "Mb-04 中野富士見町 B線", line: "丸ノ内線"},
     { audio: "audio/2-丸ノ内線/255.mp3", title: "ロッキン・メトロ", station: "Mb-05 中野新橋 B線", line: "丸ノ内線"},
     { audio: "audio/2-丸ノ内線/256.mp3", title: "ラッキーボーイ", station: "Mb-06 中野坂上 B線", line: "丸ノ内線"},
-    { audio: "audio/2-丸ノ内線/257.mp3", title: "街並みはるか", station: "乗降促進 A線", line: "丸ノ内線"},
-    { audio: "audio/2-丸ノ内線/258.mp3", title: "舞フラワー", station: "乗降促進 B線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/257.mp3", title: "街並みはるか", station: "丸ノ内線 乗降促進 A線", line: "丸ノ内線"},
+    { audio: "audio/2-丸ノ内線/258.mp3", title: "舞フラワー", station: "丸ノ内線 乗降促進 B線", line: "丸ノ内線"},
+
     { audio: "audio/3-日比谷線/301.mp3", title: "桜の川堤", station: "H-21 南千住 A線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/302.mp3", title: "タイムマシン", station: "H-20 三ノ輪 A線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/303.mp3", title: "銀箭", station: "H-19 入谷 A線", line: "日比谷線"},
@@ -488,7 +515,7 @@
     { audio: "audio/3-日比谷線/322.mp3", title: "希望の地へ", station: "H-03 広尾 B線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/323.mp3", title: "patio", station: "H-04 六本木 B線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/324.mp3", title: "Lovely Morning", station: "H-05 神谷町 B線", line: "日比谷線"},
-    {audio: "audio/3-日比谷線/325.mp3", title: "夏雲", station: "H-06 虎ノ門ヒルズ B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/325.mp3", title: "夏雲", station: "H-06 虎ノ門ヒルズ B線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/326.mp3", title: "今日も一日", station: "H-07 霞ヶ関 B線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/327.mp3", title: "公園日和", station: "H-08 日比谷 B線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/328.mp3", title: "銀座の恋の物語", station: "H-09 銀座 B線", line: "日比谷線"},
@@ -504,72 +531,118 @@
     { audio: "audio/3-日比谷線/338.mp3", title: "花びら", station: "H-19 入谷 B線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/339.mp3", title: "星まつり", station: "H-20 三ノ輪 B線", line: "日比谷線"},
     { audio: "audio/3-日比谷線/340.mp3", title: "プリズム", station: "H-21 南千住 B線", line: "日比谷線"},
-    { audio: "audio/3-日比谷線/341.mp3", title: "メトロの休日", station: "乗降促進 A線", line: "日比谷線"},
-    {audio: "audio/3-日比谷線/342.mp3", title: "七色の翼", station: "乗降促進 B線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/341.mp3", title: "メトロの休日", station: "日比谷線 乗降促進 A線", line: "日比谷線"},
+    { audio: "audio/3-日比谷線/342.mp3", title: "七色の翼", station: "日比谷線 乗降促進 B線", line: "日比谷線"},
+
     { audio: "audio/4-東西線/401.mp3", title: "A Day in the Metro (Plus)", station: "T-21 妙典 1番線", line: "東西線"},
-{ audio: "audio/4-東西線/402.mp3", title: "A Day in the Metro (Plus)", station: "T-02 落合 A線", line: "東西線"},
-{ audio: "audio/4-東西線/403.mp3", title: "A Day in the Metro (Plus)", station: "T-03 高田馬場 A線", line: "東西線"},
-{ audio: "audio/4-東西線/404.mp3", title: "A Day in the Metro (Plus)", station: "T-04 早稲田 A線", line: "東西線"},
-{ audio: "audio/4-東西線/405.mp3", title: "A Day in the Metro (Plus)", station: "T-05 神楽坂 A線", line: "東西線"},
-{ audio: "audio/4-東西線/406.mp3", title: "A Day in the Metro (Plus)", station: "T-06 飯田橋 A線", line: "東西線"},
-{ audio: "audio/4-東西線/407.mp3", title: "大きな玉ねぎの下で", station: "T-07 九段下 A線", line: "東西線"},
-{ audio: "audio/4-東西線/408.mp3", title: "A Day in the Metro (Plus)", station: "T-08 竹橋 A線", line: "東西線"},
-{ audio: "audio/4-東西線/409.mp3", title: "A Day in the Metro (Plus)", station: "T-09 大手町 A線", line: "東西線"},
-{ audio: "audio/4-東西線/410.mp3", title: "お江戸日本橋", station: "T-10 日本橋 A線", line: "東西線"},
-{ audio: "audio/4-東西線/411.mp3", title: "A Day in the Metro (Plus)", station: "T-11 茅場町 A線", line: "東西線"},
-{ audio: "audio/4-東西線/412.mp3", title: "A Day in the Metro (Plus)", station: "T-12 門前仲町 A線", line: "東西線"},
-{ audio: "audio/4-東西線/413.mp3", title: "A Day in the Metro (Plus)", station: "T-13 木場 A線", line: "東西線"},
-{ audio: "audio/4-東西線/414.mp3", title: "A Day in the Metro (Plus)", station: "T-14 東陽町 A線", line: "東西線"},
-{ audio: "audio/4-東西線/415.mp3", title: "A Day in the Metro (Plus)", station: "T-15 南砂町 A線", line: "東西線"},
-{ audio: "audio/4-東西線/416.mp3", title: "A Day in the Metro (Plus)", station: "T-16 西葛西 A線", line: "東西線"},
-{ audio: "audio/4-東西線/417.mp3", title: "A Day in the Metro (Plus)", station: "T-17 葛西 A線", line: "東西線"},
-{ audio: "audio/4-東西線/418.mp3", title: "A Day in the Metro (Plus)", station: "T-18 浦安 A線", line: "東西線"},
-{ audio: "audio/4-東西線/419.mp3", title: "A Day in the Metro (Plus)", station: "T-19 南行徳 A線", line: "東西線"},
-{ audio: "audio/4-東西線/420.mp3", title: "A Day in the Metro (Plus)", station: "T-20 行徳 A線", line: "東西線"},
-{ audio: "audio/4-東西線/421.mp3", title: "A Day in the Metro (Plus)", station: "T-21 妙典 2番線", line: "東西線"},
-{ audio: "audio/4-東西線/422.mp3", title: "A Day in the Metro (Plus)", station: "T-22 原木中山 A線", line: "東西線"},
-{ audio: "audio/4-東西線/423.mp3", title: "A Day in the Metro (Plus)", station: "T-23 西船橋 5番線", line: "東西線"},
-{ audio: "audio/4-東西線/424.mp3", title: "Beyond the Metropolis (Plus)", station: "T-23 西船橋 6番線", line: "東西線"},
-{ audio: "audio/4-東西線/425.mp3", title: "Beyond the Metropolis (Plus)", station: "T-23 西船橋 8番線", line: "東西線"},
-{ audio: "audio/4-東西線/426.mp3", title: "Beyond the Metropolis (Plus)", station: "T-22 原木中山 B線", line: "東西線"},
-{ audio: "audio/4-東西線/427.mp3", title: "Beyond the Metropolis (Plus)", station: "T-21 妙典 3番線", line: "東西線"},
-{ audio: "audio/4-東西線/428.mp3", title: "Beyond the Metropolis (Plus)", station: "T-20 行徳 B線", line: "東西線"},
-{ audio: "audio/4-東西線/429.mp3", title: "Beyond the Metropolis (Plus)", station: "T-19 南行徳 B線", line: "東西線"},
-{ audio: "audio/4-東西線/430.mp3", title: "Beyond the Metropolis (Plus)", station: "T-18 浦安 B線", line: "東西線"},
-{ audio: "audio/4-東西線/431.mp3", title: "Beyond the Metropolis (Plus)", station: "T-17 葛西 B線", line: "東西線"},
-{ audio: "audio/4-東西線/432.mp3", title: "Beyond the Metropolis (Plus)", station: "T-16 西葛西 B線", line: "東西線"},
-{ audio: "audio/4-東西線/433.mp3", title: "Beyond the Metropolis (Plus)", station: "T-15 南砂町 B線", line: "東西線"},
-{ audio: "audio/4-東西線/434.mp3", title: "Beyond the Metropolis (Plus)", station: "T-14 東陽町 B線", line: "東西線"},
-{ audio: "audio/4-東西線/435.mp3", title: "Beyond the Metropolis (Plus)", station: "T-13 木場 B線", line: "東西線"},
-{ audio: "audio/4-東西線/436.mp3", title: "Beyond the Metropolis (Plus)", station: "T-12 門前仲町 B線", line: "東西線"},
-{ audio: "audio/4-東西線/437.mp3", title: "Beyond the Metropolis (Plus)", station: "T-11 茅場町 B線", line: "東西線"},
-{ audio: "audio/4-東西線/438.mp3", title: "お江戸日本橋", station: "T-10 日本橋 B線", line: "東西線"},
-{ audio: "audio/4-東西線/439.mp3", title: "Beyond the Metropolis (Plus)", station: "T-09 大手町 B線", line: "東西線"},
-{ audio: "audio/4-東西線/440.mp3", title: "Beyond the Metropolis (Plus)", station: "T-08 竹橋 B線", line: "東西線"},
-{ audio: "audio/4-東西線/441.mp3", title: "大きな玉ねぎの下で", station: "T-07 九段下 B線", line: "東西線"},
-{ audio: "audio/4-東西線/442.mp3", title: "Beyond the Metropolis (Plus)", station: "T-06 飯田橋 B線", line: "東西線"},
-{ audio: "audio/4-東西線/443.mp3", title: "Beyond the Metropolis (Plus)", station: "T-05 神楽坂 B線", line: "東西線"},
-{ audio: "audio/4-東西線/444.mp3", title: "Beyond the Metropolis (Plus)", station: "T-04 早稲田 B線", line: "東西線"},
-{ audio: "audio/4-東西線/445.mp3", title: "Beyond the Metropolis (Plus)", station: "T-03 高田馬場 B線", line: "東西線"},
-{ audio: "audio/4-東西線/446.mp3", title: "Beyond the Metropolis (Plus)", station: "T-02 落合 B線", line: "東西線"},
-{ audio: "audio/4-東西線/447.mp3", title: "Beyond the Metropolis (Plus)", station: "T-23 西船橋 7番線", line: "東西線"},
-{ audio: "audio/4-東西線/448.mp3", title: "Beyond the Metropolis (Plus)", station: "T-21 妙典 4番線", line: "東西線"},
-{ audio: "audio/4-東西線/449.mp3", title: "スカイブルー", station: "乗降促進 A線", line: "東西線"},
-{ audio: "audio/4-東西線/450.mp3", title: "アゲハ蝶のワルツ", station: "乗降促進 B線", line: "東西線"}
+    { audio: "audio/4-東西線/402.mp3", title: "A Day in the Metro (Plus)", station: "T-02 落合 A線", line: "東西線"},
+    { audio: "audio/4-東西線/403.mp3", title: "A Day in the Metro (Plus)", station: "T-03 高田馬場 A線", line: "東西線"},
+    { audio: "audio/4-東西線/404.mp3", title: "A Day in the Metro (Plus)", station: "T-04 早稲田 A線", line: "東西線"},
+    { audio: "audio/4-東西線/405.mp3", title: "A Day in the Metro (Plus)", station: "T-05 神楽坂 A線", line: "東西線"},
+    { audio: "audio/4-東西線/406.mp3", title: "A Day in the Metro (Plus)", station: "T-06 飯田橋 A線", line: "東西線"},
+    { audio: "audio/4-東西線/407.mp3", title: "大きな玉ねぎの下で", station: "T-07 九段下 A線", line: "東西線"},
+    { audio: "audio/4-東西線/408.mp3", title: "A Day in the Metro (Plus)", station: "T-08 竹橋 A線", line: "東西線"},
+    { audio: "audio/4-東西線/409.mp3", title: "A Day in the Metro (Plus)", station: "T-09 大手町 A線", line: "東西線"},
+    { audio: "audio/4-東西線/410.mp3", title: "お江戸日本橋", station: "T-10 日本橋 A線", line: "東西線"},
+    { audio: "audio/4-東西線/411.mp3", title: "A Day in the Metro (Plus)", station: "T-11 茅場町 A線", line: "東西線"},
+    { audio: "audio/4-東西線/412.mp3", title: "A Day in the Metro (Plus)", station: "T-12 門前仲町 A線", line: "東西線"},
+    { audio: "audio/4-東西線/413.mp3", title: "A Day in the Metro (Plus)", station: "T-13 木場 A線", line: "東西線"},
+    { audio: "audio/4-東西線/414.mp3", title: "A Day in the Metro (Plus)", station: "T-14 東陽町 A線", line: "東西線"},
+    { audio: "audio/4-東西線/415.mp3", title: "A Day in the Metro (Plus)", station: "T-15 南砂町 A線", line: "東西線"},
+    { audio: "audio/4-東西線/416.mp3", title: "A Day in the Metro (Plus)", station: "T-16 西葛西 A線", line: "東西線"},
+    { audio: "audio/4-東西線/417.mp3", title: "A Day in the Metro (Plus)", station: "T-17 葛西 A線", line: "東西線"},
+    { audio: "audio/4-東西線/418.mp3", title: "A Day in the Metro (Plus)", station: "T-18 浦安 A線", line: "東西線"},
+    { audio: "audio/4-東西線/419.mp3", title: "A Day in the Metro (Plus)", station: "T-19 南行徳 A線", line: "東西線"},
+    { audio: "audio/4-東西線/420.mp3", title: "A Day in the Metro (Plus)", station: "T-20 行徳 A線", line: "東西線"},
+    { audio: "audio/4-東西線/421.mp3", title: "A Day in the Metro (Plus)", station: "T-21 妙典 2番線", line: "東西線"},
+    { audio: "audio/4-東西線/422.mp3", title: "A Day in the Metro (Plus)", station: "T-22 原木中山 A線", line: "東西線"},
+    { audio: "audio/4-東西線/423.mp3", title: "A Day in the Metro (Plus)", station: "T-23 西船橋 5番線", line: "東西線"},
+    { audio: "audio/4-東西線/424.mp3", title: "Beyond the Metropolis (Plus)", station: "T-23 西船橋 6番線", line: "東西線"},
+    { audio: "audio/4-東西線/425.mp3", title: "Beyond the Metropolis (Plus)", station: "T-23 西船橋 8番線", line: "東西線"},
+    { audio: "audio/4-東西線/426.mp3", title: "Beyond the Metropolis (Plus)", station: "T-22 原木中山 B線", line: "東西線"},
+    { audio: "audio/4-東西線/427.mp3", title: "Beyond the Metropolis (Plus)", station: "T-21 妙典 3番線", line: "東西線"},
+    { audio: "audio/4-東西線/428.mp3", title: "Beyond the Metropolis (Plus)", station: "T-20 行徳 B線", line: "東西線"},
+    { audio: "audio/4-東西線/429.mp3", title: "Beyond the Metropolis (Plus)", station: "T-19 南行徳 B線", line: "東西線"},
+    { audio: "audio/4-東西線/430.mp3", title: "Beyond the Metropolis (Plus)", station: "T-18 浦安 B線", line: "東西線"},
+    { audio: "audio/4-東西線/431.mp3", title: "Beyond the Metropolis (Plus)", station: "T-17 葛西 B線", line: "東西線"},
+    { audio: "audio/4-東西線/432.mp3", title: "Beyond the Metropolis (Plus)", station: "T-16 西葛西 B線", line: "東西線"},
+    { audio: "audio/4-東西線/433.mp3", title: "Beyond the Metropolis (Plus)", station: "T-15 南砂町 B線", line: "東西線"},
+    { audio: "audio/4-東西線/434.mp3", title: "Beyond the Metropolis (Plus)", station: "T-14 東陽町 B線", line: "東西線"},
+    { audio: "audio/4-東西線/435.mp3", title: "Beyond the Metropolis (Plus)", station: "T-13 木場 B線", line: "東西線"},
+    { audio: "audio/4-東西線/436.mp3", title: "Beyond the Metropolis (Plus)", station: "T-12 門前仲町 B線", line: "東西線"},
+    { audio: "audio/4-東西線/437.mp3", title: "Beyond the Metropolis (Plus)", station: "T-11 茅場町 B線", line: "東西線"},
+    { audio: "audio/4-東西線/438.mp3", title: "お江戸日本橋", station: "T-10 日本橋 B線", line: "東西線"},
+    { audio: "audio/4-東西線/439.mp3", title: "Beyond the Metropolis (Plus)", station: "T-09 大手町 B線", line: "東西線"},
+    { audio: "audio/4-東西線/440.mp3", title: "Beyond the Metropolis (Plus)", station: "T-08 竹橋 B線", line: "東西線"},
+    { audio: "audio/4-東西線/441.mp3", title: "大きな玉ねぎの下で", station: "T-07 九段下 B線", line: "東西線"},
+    { audio: "audio/4-東西線/442.mp3", title: "Beyond the Metropolis (Plus)", station: "T-06 飯田橋 B線", line: "東西線"},
+    { audio: "audio/4-東西線/443.mp3", title: "Beyond the Metropolis (Plus)", station: "T-05 神楽坂 B線", line: "東西線"},
+    { audio: "audio/4-東西線/444.mp3", title: "Beyond the Metropolis (Plus)", station: "T-04 早稲田 B線", line: "東西線"},
+    { audio: "audio/4-東西線/445.mp3", title: "Beyond the Metropolis (Plus)", station: "T-03 高田馬場 B線", line: "東西線"},
+    { audio: "audio/4-東西線/446.mp3", title: "Beyond the Metropolis (Plus)", station: "T-02 落合 B線", line: "東西線"},
+    { audio: "audio/4-東西線/447.mp3", title: "Beyond the Metropolis (Plus)", station: "T-23 西船橋 7番線", line: "東西線"},
+    { audio: "audio/4-東西線/448.mp3", title: "Beyond the Metropolis (Plus)", station: "T-21 妙典 4番線", line: "東西線"},
+    { audio: "audio/4-東西線/449.mp3", title: "スカイブルー", station: "東西線 乗降促進 A線", line: "東西線"},
+    { audio: "audio/4-東西線/450.mp3", title: "アゲハ蝶のワルツ", station: "東西線 乗降促進 B線", line: "東西線"},
+
+    { audio: "audio/5-千代田線/501.mp3", title: "千歳緑", station: "C-20 北綾瀬 1番線", line: "千代田線" },
+    { audio: "audio/5-千代田線/502.mp3", title: "閃緑", station: "C-19 綾瀬 1番線", line: "千代田線" },
+    { audio: "audio/5-千代田線/503.mp3", title: "市松模様", station: "C-19 綾瀬 2番線", line: "千代田線" },
+    { audio: "audio/5-千代田線/504.mp3", title: "気分はスイング", station: "C-17 町屋 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/505.mp3", title: "ソーダ水", station: "C-16 西日暮里 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/506.mp3", title: "Retro Urban", station: "C-15 千駄木 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/507.mp3", title: "花便り", station: "C-14 根津 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/508.mp3", title: "古今", station: "C-13 湯島 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/509.mp3", title: "モザイク", station: "C-12 新御茶ノ水 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/510.mp3", title: "光のカテナリー", station: "C-11 大手町 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/511.mp3", title: "橋を渡れば", station: "C-10 二重橋前 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/512.mp3", title: "ショウが始まるよ", station: "C-09 日比谷 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/513.mp3", title: "memoir", station: "C-08 霞ヶ関 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/514.mp3", title: "希望を乗せて", station: "C-07 国会議事堂前 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/515.mp3", title: "ペリドット", station: "C-06 赤坂 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/516.mp3", title: "君の名は希望", station: "C-05 乃木坂 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/517.mp3", title: "ハイヒールパレード", station: "C-04 表参道 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/518.mp3", title: "月夜のカーニバル", station: "C-03 明治神宮前 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/519.mp3", title: "常盤木", station: "C-02 代々木公園 A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/520.mp3", title: "若葉の散歩道", station: "C-02 代々木公園 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/521.mp3", title: "カトレアの花束", station: "C-03 明治神宮前 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/522.mp3", title: "三つの願い", station: "C-04 表参道 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/523.mp3", title: "君の名は希望", station: "C-05 乃木坂 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/524.mp3", title: "きっと、また会える", station: "C-06 赤坂 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/525.mp3", title: "ペパーミント", station: "C-07 国会議事堂前 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/526.mp3", title: "穏やかな午後を", station: "C-08 霞ヶ関 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/527.mp3", title: "スニーカー", station: "C-09 日比谷 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/528.mp3", title: "水のワルツ", station: "C-10 二重橋前 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/529.mp3", title: "あなたと一緒なら", station: "C-11 大手町 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/530.mp3", title: "すばらしき出会い", station: "C-12 新御茶ノ水 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/531.mp3", title: "緑のスキップ", station: "C-13 湯島 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/532.mp3", title: "ほっと一息", station: "C-14 根津 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/533.mp3", title: "古きをたずねて", station: "C-15 千駄木 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/534.mp3", title: "帰り道", station: "C-16 西日暮里 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/535.mp3", title: "夏木立", station: "C-17 町屋 B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/536.mp3", title: "プリティ・タウン", station: "C-19 綾瀬 4番線", line: "千代田線" },
+    { audio: "audio/5-千代田線/537.mp3", title: "雨が上がったよ", station: "C-19 綾瀬 3番線", line: "千代田線" },
+    { audio: "audio/5-千代田線/538.mp3", title: "茜", station: "C-19 綾瀬 0番線", line: "千代田線" },
+    { audio: "audio/5-千代田線/539.mp3", title: "すべてここから始まった", station: "千代田線 乗降促進 本線A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/540.mp3", title: "色鉛筆", station: "千代田線 乗降促進 本線B線", line: "千代田線" },
+    { audio: "audio/5-千代田線/541.mp3", title: "Go Forward", station: "千代田線 乗降促進 支線A線", line: "千代田線" },
+    { audio: "audio/5-千代田線/542.mp3", title: "かぎろい", station: "千代田線 乗降促進 支線B線", line: "千代田線" }
   ];
 
   const lineColors = {
     "銀座線": "ginza",
     "丸ノ内線": "marunouchi",
     "日比谷線": "hibiya",
-    "東西線": "tozai"
+    "東西線": "tozai",
+    "千代田線": "chiyoda"
   };
 
   const lineBackgrounds = {
-  "銀座線": "ginza-bg",
-  "丸ノ内線": "marunouchi-bg",
-  "日比谷線": "hibiya-bg",
-  "東西線": "tozai-bg"
+    "銀座線": "ginza-bg",
+    "丸ノ内線": "marunouchi-bg",
+    "日比谷線": "hibiya-bg",
+    "東西線": "tozai-bg",
+    "千代田線": "chiyoda-bg"
   };
 
   let questions = [];
@@ -644,7 +717,8 @@
     "ginza-bg",
     "marunouchi-bg",
     "hibiya-bg",
-    "tozai-bg"
+    "tozai-bg",
+    "chiyoda-bg"
     );
 
     document.body.classList.remove("setup-mode");
@@ -715,9 +789,11 @@ function nextQuestion() {
     document.body.classList.add("quiz-mode");
 
     document.body.classList.remove(
-      "ginza-bg",
-      "marunouchi-bg",
-      "hibiya-bg"
+        "ginza-bg",
+        "marunouchi-bg",
+        "hibiya-bg",
+        "tozai-bg",
+        "chiyoda-bg"
     );
 
     document.body.classList.add(bgClass);

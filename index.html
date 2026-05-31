@@ -79,6 +79,9 @@
     .chiyoda{
       color: #00B982;
     }
+    .yuurakucho{
+      color: #C5A670;
+    }
 
     .line-options {
       display: flex;
@@ -191,6 +194,20 @@
       background:
         linear-gradient(
           rgba(0, 185, 130, 0.18), rgba(0, 185, 130, 0.35)
+        ),
+        url("image/metro.png");
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    body.yuurakucho-bg {
+      background:
+        linear-gradient(
+          rgba(197, 166, 112, 0.18),
+          rgba(197, 166, 112, 0.35)
         ),
         url("image/metro.png");
 
@@ -348,6 +365,17 @@
           data-on="image/C.png"
           data-off="image/C_bw.png"
           alt="千代田線"
+          >
+      </label>
+
+      <label class="line-card">
+        <input type="checkbox" name="lineCheck" value="有楽町線" checked>
+          <img
+          class="line-image"
+          src="image/Y.png"
+          data-on="image/Y.png"
+          data-off="image/Y_bw.png"
+          alt="有楽町線"
           >
       </label>
 
@@ -626,7 +654,57 @@
     { audio: "audio/5-千代田線/539.mp3", title: "すべてここから始まった", station: "千代田線 乗降促進 本線A線", line: "千代田線" },
     { audio: "audio/5-千代田線/540.mp3", title: "色鉛筆", station: "千代田線 乗降促進 本線B線", line: "千代田線" },
     { audio: "audio/5-千代田線/541.mp3", title: "Go Forward", station: "千代田線 乗降促進 支線A線", line: "千代田線" },
-    { audio: "audio/5-千代田線/542.mp3", title: "かぎろい", station: "千代田線 乗降促進 支線B線", line: "千代田線" }
+    { audio: "audio/5-千代田線/542.mp3", title: "かぎろい", station: "千代田線 乗降促進 支線B線", line: "千代田線" },
+
+    { audio: "audio/6-有楽町線/601.mp3", title: "電車ライト", station: "Y-02 地下鉄成増 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/602.mp3", title: "レッツトレイン", station: "Y-03 地下鉄赤塚 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/603.mp3", title: "輪になって", station: "Y-04 平和台 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/604.mp3", title: "もう来ます", station: "Y-05 氷川台 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/605.mp3", title: "オーバーフロー", station: "Y-06 小竹向原 1番線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/606.mp3", title: "駅ストレッチ", station: "Y-06 小竹向原 2番線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/607.mp3", title: "スター車両", station: "Y-07 千川 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/608.mp3", title: "休みながら", station: "Y-08 要町 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/609.mp3", title: "bright", station: "Y-09 池袋 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/610.mp3", title: "マイルド電車", station: "Y-10 東池袋 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/611.mp3", title: "冒険電車", station: "Y-11 護国寺 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/612.mp3", title: "星の舞踏会", station: "Y-12 江戸川橋 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/613.mp3", title: "ラブリートレイン", station: "Y-13 飯田橋 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/614.mp3", title: "common", station: "Y-14 市ヶ谷 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/615.mp3", title: "キューティー電車", station: "Y-15 麹町 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/616.mp3", title: "サムライ電車", station: "Y-16 永田町 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/617.mp3", title: "雪景色", station: "Y-17 桜田門 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/618.mp3", title: "一緒に", station: "Y-18 有楽町 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/619.mp3", title: "花時計", station: "Y-19 銀座一丁目 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/620.mp3", title: "雨が上がれば", station: "Y-20 新富町 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/621.mp3", title: "江戸の街", station: "Y-21 月島 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/622.mp3", title: "たんとんとん", station: "Y-22 豊洲 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/623.mp3", title: "スキップ車両", station: "Y-23 辰巳 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/624.mp3", title: "明日はきっと", station: "Y-24 新木場 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/625.mp3", title: "駆け込み禁止", station: "Y-23 辰巳 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/626.mp3", title: "風はみどりの", station: "Y-22 豊洲 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/627.mp3", title: "旅の前日", station: "Y-21 月島 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/628.mp3", title: "目覚めの電車", station: "Y-20 新富町 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/629.mp3", title: "Rolling", station: "Y-19 銀座一丁目 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/630.mp3", title: "アンブレラ・ワルツ", station: "Y-18 有楽町 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/631.mp3", title: "地下鉄が好き", station: "Y-17 桜田門 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/632.mp3", title: "パピヨン", station: "Y-16 永田町 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/633.mp3", title: "きらめき電車", station: "Y-15 麹町 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/634.mp3", title: "電車でウキウキ", station: "Y-14 市ヶ谷 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/635.mp3", title: "星のゆくえ", station: "Y-13 飯田橋 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/636.mp3", title: "風香る駅", station: "Y-12 江戸川橋 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/637.mp3", title: "かざぐるま", station: "Y-11 護国寺 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/638.mp3", title: "時のスパイラル", station: "Y-10 東池袋 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/639.mp3", title: "OK!", station: "Y-09 池袋 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/640.mp3", title: "電車へステップ", station: "Y-08 要町 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/641.mp3", title: "さわやかステーション", station: "Y-07 千川 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/642.mp3", title: "キャロット", station: "Y-06 小竹向原 3番線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/643.mp3", title: "無休", station: "Y-06 小竹向原 4番線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/644.mp3", title: "ワクワク電車", station: "Y-05 氷川台 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/645.mp3", title: "こおろぎ", station: "Y-04 平和台 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/646.mp3", title: "始まるよ", station: "Y-03 地下鉄赤塚 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/647.mp3", title: "はらり", station: "Y-02 地下鉄成増 B線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/648.mp3", title: "未来電車", station: "有楽町線 乗降促進 A線", line: "有楽町線" },
+    { audio: "audio/6-有楽町線/649.mp3", title: "RAPID", station: "有楽町線 乗降促進 B線", line: "有楽町線" }
   ];
 
   const lineColors = {
@@ -634,7 +712,8 @@
     "丸ノ内線": "marunouchi",
     "日比谷線": "hibiya",
     "東西線": "tozai",
-    "千代田線": "chiyoda"
+    "千代田線": "chiyoda",
+    "有楽町線": "yuurakucho" 
   };
 
   const lineBackgrounds = {
@@ -642,7 +721,8 @@
     "丸ノ内線": "marunouchi-bg",
     "日比谷線": "hibiya-bg",
     "東西線": "tozai-bg",
-    "千代田線": "chiyoda-bg"
+    "千代田線": "chiyoda-bg",
+    "有楽町線": "yuurakucho-bg" 
   };
 
   let questions = [];
@@ -718,7 +798,8 @@
     "marunouchi-bg",
     "hibiya-bg",
     "tozai-bg",
-    "chiyoda-bg"
+    "chiyoda-bg",
+    "yuurakucho-bg"
     );
 
     document.body.classList.remove("setup-mode");
@@ -793,7 +874,8 @@ function nextQuestion() {
         "marunouchi-bg",
         "hibiya-bg",
         "tozai-bg",
-        "chiyoda-bg"
+        "chiyoda-bg",
+        "yuurakucho-bg"
     );
 
     document.body.classList.add(bgClass);

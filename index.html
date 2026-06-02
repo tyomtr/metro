@@ -64,24 +64,15 @@
      font-size: 25px;
     }
 
-    .ginza {
-      color: #f39700;
-    }
-    .marunouchi {
-      color: #e60012;
-    }
-    .hibiya{
-      color: #BAB7AC;
-    }
-    .tozai{
-      color: #00A7DB;
-    }
-    .chiyoda{
-      color: #00B982;
-    }
-    .yuurakucho{
-      color: #C5A670;
-    }
+.ginza {color: #f39700;}
+.marunouchi {color: #e60012;}
+.hibiya {color: #BAB7AC;}
+.tozai {color: #00A7DB;}
+.chiyoda {color: #00B982;}
+.yuurakucho {color: #C5A670;}
+.hanzomon {color: #9B7CB6;}
+.namboku {color: #00ADA9;}
+.fukutoshin {color: #BB641D;}
 
     .line-options {
       display: flex;
@@ -145,6 +136,72 @@
 
     .line-card:hover {
       transform: scale(1.02);
+    }
+
+    .line-toggle-buttons,
+    .question-count-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .line-toggle-buttons {
+      margin: 16px 0 30px;
+    }
+
+    .question-count-buttons {
+      margin: 0;
+    }
+
+    .line-toggle-buttons button,
+    .question-count-buttons button,
+    #quiz button,
+    #result button {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 9px 20px;
+      margin: 0;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 48, 87, 0.25);
+      background: rgba(255,255,255,0.82);
+      color: #003057;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .line-toggle-buttons button:hover,
+    .question-count-buttons button:hover,
+    #quiz button:hover,
+    #result button:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .line-toggle-buttons .select-all,
+    .line-toggle-buttons .clear-all {
+      color: #555;
+      border-color: rgba(0,0,0,0.18);
+    }
+
+    .question-count-buttons button {
+      font-size: 20px;
+      padding: 12px 28px;
+      min-width: 92px;
+    }
+
+    #showAnswerBtn,
+    #judgeButtons button,
+    #answerButtons button,
+    #result button {
+      font-size: 20px;
+      padding: 12px 28px;
+      min-width: 100px;
     }
 
     /* 解答時の背景色 */
@@ -217,12 +274,78 @@
       background-attachment: fixed;
     }
 
+    body.hanzomon-bg {
+      background:
+        linear-gradient(
+          rgba(155, 124, 182, 0.18),
+          rgba(155, 124, 182, 0.35)
+        ),
+        url("image/metro.png");
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    body.namboku-bg {
+      background:
+        linear-gradient(
+          rgba(0, 173, 169, 0.18),
+          rgba(0, 173, 169, 0.35)
+        ),
+        url("image/metro.png");
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    body.fukutoshin-bg {
+      background:
+        linear-gradient(
+          rgba(187, 100, 29, 0.18),
+          rgba(187, 100, 29, 0.35)
+        ),
+        url("image/metro.png");
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    body.yf-bg {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(197, 166, 112, 0.30) 0%,
+          rgba(192, 133, 71, 0.25) 50%,
+          rgba(187, 100, 29, 0.30) 100%
+        ),
+        url("image/metro.png");
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
     #answerButtons {
       margin-top: 20px;
     }
 
     #answerButtons button {
       display: inline-block;
+    }
+
+    #judgeButtons,
+    #answerButtons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     #contact {
@@ -235,19 +358,30 @@
       font-size: 14px;
     }
 
-    .selected-correct {
+    #quiz button.selected-correct {
       background: #4caf50;
+      border-color: rgba(76, 175, 80, 0.45);
       color: white;
     }
 
-    .selected-wrong {
+    #quiz button.selected-wrong {
       background: #f44336;
+      border-color: rgba(244, 67, 54, 0.45);
       color: white;
     }
 
     button:disabled {
       opacity: 1;
       cursor: default;
+    }
+
+    #quiz button:disabled {
+      cursor: default;
+    }
+
+    #quiz button:disabled:hover {
+      transform: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     }
 
     .score-detail {
@@ -379,12 +513,30 @@
           >
       </label>
 
-    </div>
-  <br>
+      <label class="line-card">
+        <input type="checkbox" name="lineCheck" value="半蔵門線" checked>
+          <img
+          class="line-image"
+          src="image/Z.png"
+          data-on="image/Z.png"
+          data-off="image/Z_bw.png"
+          alt="半蔵門線"
+          >
+      </label>
 
-    <button onclick="startGame(5)">5問</button>
-    <button onclick="startGame(10)">10問</button>
-    <button onclick="startGame(999)">すべて</button>
+    </div>
+
+    <div class="line-toggle-buttons">
+      <button type="button" class="select-all" onclick="setAllLines(true)">全選択</button>
+      <button type="button" class="clear-all" onclick="setAllLines(false)">全解除</button>
+    </div>
+
+    <div class="question-count-buttons">
+      <button type="button" onclick="startGame(5)">5問</button>
+      <button type="button" onclick="startGame(10)">10問</button>
+      <button type="button" onclick="startGame(20)">20問</button>
+      <button type="button" onclick="startGame(999)">全部</button>
+    </div>
   </div>
 
   <!-- 出題画面 -->
@@ -397,7 +549,7 @@
       <button id="wrongBtn" onclick="judgeAnswer(false)">不正解</button>
     </div>
     <div id="answerButtons" class="hidden">
-      <button id="playBtn" onclick="playAudio()">▶ 再生</button>
+      <button id="playBtn" onclick="playAudio()">▶再生</button>
       <button id="nextBtn" onclick="nextQuestion()">次へ</button>
       <button id="endBtn" onclick="endGame()">終了</button>
     </div>
@@ -704,7 +856,39 @@
     { audio: "audio/6-有楽町線/646.mp3", title: "始まるよ", station: "Y-03 地下鉄赤塚 B線", line: "有楽町線" },
     { audio: "audio/6-有楽町線/647.mp3", title: "はらり", station: "Y-02 地下鉄成増 B線", line: "有楽町線" },
     { audio: "audio/6-有楽町線/648.mp3", title: "未来電車", station: "有楽町線 乗降促進 A線", line: "有楽町線" },
-    { audio: "audio/6-有楽町線/649.mp3", title: "RAPID", station: "有楽町線 乗降促進 B線", line: "有楽町線" }
+    { audio: "audio/6-有楽町線/649.mp3", title: "RAPID", station: "有楽町線 乗降促進 B線", line: "有楽町線" },
+
+    { audio: "audio/7-半蔵門線/701.mp3", title: "エントランス", station: "Z-02 表参道 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/702.mp3", title: "朝陽のシャワー", station: "Z-03 青山一丁目 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/703.mp3", title: "黎明", station: "Z-04 永田町 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/704.mp3", title: "寿式三番叟", station: "Z-05 半蔵門 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/705.mp3", title: "手を取って", station: "Z-06 九段下 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/706.mp3", title: "夕涼み", station: "Z-07 神保町 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/707.mp3", title: "メトロでGo!", station: "Z-08 大手町 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/708.mp3", title: "お江戸日本橋", station: "Z-09 三越前 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/709.mp3", title: "糸竹の道", station: "Z-10 水天宮前 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/710.mp3", title: "万華鏡", station: "Z-11 清澄白河 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/711.mp3", title: "花霞", station: "Z-12 住吉 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/712.mp3", title: "五月雨", station: "Z-13 錦糸町 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/713.mp3", title: "スタートアップ", station: "Z-14 押上 4番線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/714.mp3", title: "紫電", station: "Z-14 押上 1番線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/715.mp3", title: "ライブラリー", station: "Z-14 押上 2番線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/716.mp3", title: "見上げる空に", station: "Z-14 押上 3番線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/717.mp3", title: "光彩都市", station: "Z-13 錦糸町 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/718.mp3", title: "深呼吸", station: "Z-12 住吉 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/719.mp3", title: "カットグラス", station: "Z-11 清澄白河 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/720.mp3", title: "川の辺", station: "Z-10 水天宮前 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/721.mp3", title: "お江戸日本橋", station: "Z-09 三越前 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/722.mp3", title: "マーキュリー", station: "Z-08 大手町 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/723.mp3", title: "ブックマーク", station: "Z-07 神保町 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/724.mp3", title: "センスオブワンダー", station: "Z-06 九段下 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/725.mp3", title: "てんつつ", station: "Z-05 半蔵門 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/726.mp3", title: "今日もどこかで", station: "Z-04 永田町 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/727.mp3", title: "サヴァラン", station: "Z-03 青山一丁目 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/728.mp3", title: "薫風", station: "Z-02 表参道 B線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/729.mp3", title: "新しい仲間", station: "半蔵門線 乗降促進 A線", line: "半蔵門線" },
+    { audio: "audio/7-半蔵門線/730.mp3", title: "晴れ晴れと", station: "半蔵門線 乗降促進 B線", line: "半蔵門線" }
+
   ];
 
   const lineColors = {
@@ -713,7 +897,10 @@
     "日比谷線": "hibiya",
     "東西線": "tozai",
     "千代田線": "chiyoda",
-    "有楽町線": "yuurakucho" 
+    "有楽町線": "yuurakucho",
+    "半蔵門線": "hanzomon",
+    "南北線": "namboku",
+    "副都心線": "fukutoshin"
   };
 
   const lineBackgrounds = {
@@ -722,7 +909,10 @@
     "日比谷線": "hibiya-bg",
     "東西線": "tozai-bg",
     "千代田線": "chiyoda-bg",
-    "有楽町線": "yuurakucho-bg" 
+    "有楽町線": "yuurakucho-bg",
+    "半蔵門線": "hanzomon-bg",
+    "南北線": "namboku-bg",
+    "副都心線": "fukutoshin-bg"
   };
 
   let questions = [];
@@ -742,10 +932,25 @@
     return array;
   }
 
+  function updatePlayButton() {
+    const playBtn = document.getElementById("playBtn");
+
+    if (playBtn) {
+      playBtn.textContent = audio.paused ? "▶再生" : "停止";
+    }
+  }
+
   function playAudio() {
-    audio.pause();
+    if (!audio.paused) {
+      audio.pause();
+      audio.currentTime = 0;
+      updatePlayButton();
+      return;
+    }
+
     audio.currentTime = 0;
     audio.play();
+    updatePlayButton();
   }
 
   function startGame(count) {
@@ -794,12 +999,16 @@
     document.getElementById("wrongBtn").classList.remove("selected-wrong");
     
     document.body.classList.remove(
-    "ginza-bg",
-    "marunouchi-bg",
-    "hibiya-bg",
-    "tozai-bg",
-    "chiyoda-bg",
-    "yuurakucho-bg"
+      "ginza-bg",
+      "marunouchi-bg",
+      "hibiya-bg",
+      "tozai-bg",
+      "chiyoda-bg",
+      "yuurakucho-bg",
+      "hanzomon-bg",
+      "namboku-bg",
+      "fukutoshin-bg",
+      "yf-bg"
     );
 
     document.body.classList.remove("setup-mode");
@@ -807,6 +1016,7 @@
 
     document.getElementById("answer").classList.add("hidden");
     document.getElementById("nextBtn").classList.add("hidden");
+    updatePlayButton();
     
     document.getElementById("progress").textContent =
     `${questions.length}問中 ${current + 1}問目`;
@@ -821,7 +1031,10 @@
         audio.volume = 1.0;
       }
 
-    audio.onended = showAnswer;
+    audio.onended = () => {
+      updatePlayButton();
+      showAnswer();
+    };
 
     const endBtn = document.getElementById("endBtn");
 
@@ -831,11 +1044,13 @@
       document.getElementById("endBtn").classList.remove("hidden");
     }
     audio.play();
+    updatePlayButton();
   }
 
 function nextQuestion() {
   audio.pause();
   audio.currentTime = 0;
+  updatePlayButton();
 
   current++;
 
@@ -860,6 +1075,7 @@ function nextQuestion() {
 
   function showAnswerNow() {
     audio.pause();
+    updatePlayButton();
 
     const q = questions[current];
 
@@ -870,12 +1086,16 @@ function nextQuestion() {
     document.body.classList.add("quiz-mode");
 
     document.body.classList.remove(
-        "ginza-bg",
-        "marunouchi-bg",
-        "hibiya-bg",
-        "tozai-bg",
-        "chiyoda-bg",
-        "yuurakucho-bg"
+      "ginza-bg",
+      "marunouchi-bg",
+      "hibiya-bg",
+      "tozai-bg",
+      "chiyoda-bg",
+      "yuurakucho-bg",
+      "hanzomon-bg",
+      "namboku-bg",
+      "fukutoshin-bg",
+      "yf-bg"
     );
 
     document.body.classList.add(bgClass);
@@ -902,6 +1122,7 @@ function nextQuestion() {
 
   function showAnswer() {
     audio.pause();
+    updatePlayButton();
 
     const q = questions[current];
     const lineClass = lineColors[q.line] || "";
@@ -910,7 +1131,8 @@ function nextQuestion() {
     document.body.classList.remove("setup-mode");
     document.body.classList.add("quiz-mode");
 
-    document.body.classList.remove("ginza-bg", "marunouchi-bg", "hibiya-bg");
+    document.body.classList.remove
+      ("ginza-bg", "marunouchi-bg", "hibiya-bg","tozai-bg","chiyoda-bg","yuurakucho-bg","hanzomon-bg","namboku-bg","fukutoshin-bg", "yf-bg");
     document.body.classList.add(bgClass);
 
     document.getElementById("answer").innerHTML =
@@ -962,6 +1184,7 @@ function nextQuestion() {
   function endGame() {
   audio.pause();
   audio.currentTime = 0;
+  updatePlayButton();
   
   const score = answeredCount === 0
   ? 0
@@ -982,22 +1205,29 @@ function nextQuestion() {
     `;
   }
 
-document.querySelectorAll('.line-card input').forEach(input => {
-
+function updateLineImage(input) {
   const img = input.parentElement.querySelector('.line-image');
 
-  function updateImage() {
+  if (img) {
     img.src = input.checked
       ? img.dataset.on
       : img.dataset.off;
   }
+}
 
+function setAllLines(checked) {
+  document.querySelectorAll('input[name="lineCheck"]').forEach(input => {
+    input.checked = checked;
+    updateLineImage(input);
+  });
+}
+
+document.querySelectorAll('.line-card input').forEach(input => {
   // 初期状態
-  updateImage();
+  updateLineImage(input);
 
   // クリック時
-  input.addEventListener('change', updateImage);
-
+  input.addEventListener('change', () => updateLineImage(input));
 });
 
 </script>

@@ -154,6 +154,60 @@
       margin: 0;
     }
 
+        .autoplay-setting {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 24px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #003057;
+    }
+
+    .autoplay-switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 72px;
+      height: 38px;
+      cursor: pointer;
+    }
+
+    .autoplay-switch input {
+      display: none;
+    }
+
+    .autoplay-slider {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: rgba(120,120,120,0.55);
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.18);
+      transition: background 0.2s ease;
+    }
+
+    .autoplay-slider::before {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      left: 4px;
+      top: 4px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.24);
+      transition: transform 0.2s ease;
+    }
+
+    .autoplay-switch input:checked + .autoplay-slider {
+      background: #00B982;
+    }
+
+    .autoplay-switch input:checked + .autoplay-slider::before {
+      transform: translateX(34px);
+    }
+
     .line-toggle-buttons button,
     .question-count-buttons button,
     #quiz button,
@@ -524,11 +578,30 @@
           >
       </label>
 
+      <label class="line-card">
+        <input type="checkbox" name="lineCheck" value="南北線" checked>
+          <img
+          class="line-image"
+          src="image/N.png"
+          data-on="image/N.png"
+          data-off="image/N_bw.png"
+          alt="南北線"
+          >
+      </label>
+
     </div>
 
     <div class="line-toggle-buttons">
       <button type="button" class="select-all" onclick="setAllLines(true)">全選択</button>
       <button type="button" class="clear-all" onclick="setAllLines(false)">全解除</button>
+    </div>
+
+    <div class="autoplay-setting">
+      <span>自動再生</span>
+      <label class="autoplay-switch">
+        <input type="checkbox" id="autoPlayToggle">
+        <span class="autoplay-slider"></span>
+      </label>
     </div>
 
     <div class="question-count-buttons">
@@ -887,7 +960,48 @@
     { audio: "audio/7-半蔵門線/727.mp3", title: "サヴァラン", station: "Z-03 青山一丁目 B線", line: "半蔵門線" },
     { audio: "audio/7-半蔵門線/728.mp3", title: "薫風", station: "Z-02 表参道 B線", line: "半蔵門線" },
     { audio: "audio/7-半蔵門線/729.mp3", title: "新しい仲間", station: "半蔵門線 乗降促進 A線", line: "半蔵門線" },
-    { audio: "audio/7-半蔵門線/730.mp3", title: "晴れ晴れと", station: "半蔵門線 乗降促進 B線", line: "半蔵門線" }
+    { audio: "audio/7-半蔵門線/730.mp3", title: "晴れ晴れと", station: "半蔵門線 乗降促進 B線", line: "半蔵門線" },
+
+    { audio: "audio/8-南北線/801.mp3", title: "銀のしずく", station: "N-02 白金台 A線", line: "南北線" },
+    { audio: "audio/8-南北線/802.mp3", title: "つかの間の", station: "N-03 白金高輪 1番線", line: "南北線" },
+    { audio: "audio/8-南北線/803.mp3", title: "躍動する都会", station: "N-03 白金高輪 2番線", line: "南北線" },
+    { audio: "audio/8-南北線/804.mp3", title: "ミントベル", station: "N-04 麻布十番 A線", line: "南北線" },
+    { audio: "audio/8-南北線/805.mp3", title: "さざ波", station: "N-05 六本木一丁目 A線", line: "南北線" },
+    { audio: "audio/8-南北線/806.mp3", title: "poco a poco", station: "N-06 溜池山王 A線", line: "南北線" },
+    { audio: "audio/8-南北線/807.mp3", title: "明日への階段", station: "N-07 永田町 A線", line: "南北線" },
+    { audio: "audio/8-南北線/808.mp3", title: "午後のひととき", station: "N-08 四ツ谷 A線", line: "南北線" },
+    { audio: "audio/8-南北線/809.mp3", title: "明るい水辺", station: "N-09 市ヶ谷 A線", line: "南北線" },
+    { audio: "audio/8-南北線/810.mp3", title: "坂のある街", station: "N-10 飯田橋 A線", line: "南北線" },
+    { audio: "audio/8-南北線/811.mp3", title: "Take me out to the ball game", station: "N-11 後楽園 A線", line: "南北線" },
+    { audio: "audio/8-南北線/812.mp3", title: "花咲く学び舎", station: "N-12 東大前 A線", line: "南北線" },
+    { audio: "audio/8-南北線/813.mp3", title: "Next Step", station: "N-13 本駒込 A線", line: "南北線" },
+    { audio: "audio/8-南北線/814.mp3", title: "ビスマス", station: "N-14 駒込 A線", line: "南北線" },
+    { audio: "audio/8-南北線/815.mp3", title: "桜並木を望んで", station: "N-15 西ヶ原 A線", line: "南北線" },
+    { audio: "audio/8-南北線/816.mp3", title: "地図を広げて", station: "N-16 王子 A線", line: "南北線" },
+    { audio: "audio/8-南北線/817.mp3", title: "小さなオルゴール", station: "N-17 王子神谷 A線", line: "南北線" },
+    { audio: "audio/8-南北線/818.mp3", title: "時のしらべ", station: "N-18 志茂 A線", line: "南北線" },
+    { audio: "audio/8-南北線/819.mp3", title: "ティー・スプーン", station: "N-19 赤羽岩淵 A線", line: "南北線" },
+    { audio: "audio/8-南北線/820.mp3", title: "リズムガーデン", station: "N-19 赤羽岩淵 B線", line: "南北線" },
+    { audio: "audio/8-南北線/821.mp3", title: "月は南に", station: "N-18 志茂 B線", line: "南北線" },
+    { audio: "audio/8-南北線/822.mp3", title: "いつもの駅で", station: "N-17 王子神谷 B線", line: "南北線" },
+    { audio: "audio/8-南北線/823.mp3", title: "ノッカー", station: "N-16 王子 B線", line: "南北線" },
+    { audio: "audio/8-南北線/824.mp3", title: "風のゆくえ", station: "N-15 西ヶ原 B線", line: "南北線" },
+    { audio: "audio/8-南北線/825.mp3", title: "ツツジ、咲く", station: "N-14 駒込 B線", line: "南北線" },
+    { audio: "audio/8-南北線/826.mp3", title: "屋敷のある街", station: "N-13 本駒込 B線", line: "南北線" },
+    { audio: "audio/8-南北線/827.mp3", title: "銀杏の並木道", station: "N-12 東大前 B線", line: "南北線" },
+    { audio: "audio/8-南北線/828.mp3", title: "Take me out to the ball game", station: "N-11 後楽園 B線", line: "南北線" },
+    { audio: "audio/8-南北線/829.mp3", title: "水の戯れ", station: "N-10 飯田橋 B線", line: "南北線" },
+    { audio: "audio/8-南北線/830.mp3", title: "オアシス", station: "N-09 市ヶ谷 B線", line: "南北線" },
+    { audio: "audio/8-南北線/831.mp3", title: "ソフィアの鐘の音", station: "N-08 四ツ谷 B線", line: "南北線" },
+    { audio: "audio/8-南北線/832.mp3", title: "希望の夜明け", station: "N-07 永田町 B線", line: "南北線" },
+    { audio: "audio/8-南北線/833.mp3", title: "天然水", station: "N-06 溜池山王 B線", line: "南北線" },
+    { audio: "audio/8-南北線/834.mp3", title: "陽だまり", station: "N-05 六本木一丁目 B線", line: "南北線" },
+    { audio: "audio/8-南北線/835.mp3", title: "カリンの実", station: "N-04 麻布十番 B線", line: "南北線" },
+    { audio: "audio/8-南北線/836.mp3", title: "エメラルド・グリーン", station: "N-03 白金高輪 3番線", line: "南北線" },
+    { audio: "audio/8-南北線/837.mp3", title: "素敵なお店", station: "N-03 白金高輪 4番線", line: "南北線" },
+    { audio: "audio/8-南北線/838.mp3", title: "テラコッタ", station: "N-02 白金台 B線", line: "南北線" },
+    { audio: "audio/8-南北線/839.mp3", title: "曲名不明", station: "南北線 乗降促進 A線", line: "南北線" },
+    { audio: "audio/8-南北線/840.mp3", title: "曲名不明", station: "南北線 乗降促進 B線", line: "南北線" }
 
   ];
 
@@ -923,6 +1037,9 @@
   let correctCount = 0;
   let answeredCount = 0;
   let answered = false;
+  let autoPlayEnabled = false;
+  let answerDelayTimer = null;
+  let autoNextTimer = null;
 
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -940,7 +1057,27 @@
     }
   }
 
+    function clearAnswerDelayTimer() {
+    if (answerDelayTimer) {
+      clearTimeout(answerDelayTimer);
+      answerDelayTimer = null;
+    }
+  }
+
+  function clearAutoNextTimer() {
+    if (autoNextTimer) {
+      clearTimeout(autoNextTimer);
+      autoNextTimer = null;
+    }
+  }
+
+  function clearQuestionTimers() {
+    clearAnswerDelayTimer();
+    clearAutoNextTimer();
+  }
+
   function playAudio() {
+    clearQuestionTimers();
     if (!audio.paused) {
       audio.pause();
       audio.currentTime = 0;
@@ -948,7 +1085,6 @@
       return;
     }
 
-    audio.currentTime = 0;
     audio.play();
     updatePlayButton();
   }
@@ -957,6 +1093,8 @@
     correctCount = 0;
     answeredCount = 0;
     answered = false;
+    autoPlayEnabled = document.getElementById("autoPlayToggle").checked;
+    clearQuestionTimers();
 
     const selectedLines = Array.from(
       document.querySelectorAll('input[name="lineCheck"]:checked')
@@ -984,6 +1122,7 @@
   }
 
   function loadQuestion() {
+    clearQuestionTimers();
     document.getElementById("judgeButtons").classList.add("hidden");
     document.getElementById("answerButtons").classList.add("hidden");
     document.getElementById("answer").classList.add("hidden");
@@ -1033,7 +1172,11 @@
 
     audio.onended = () => {
       updatePlayButton();
-      showAnswer();
+      clearAnswerDelayTimer();
+      answerDelayTimer = setTimeout(() => {
+        answerDelayTimer = null;
+        showAnswer();
+      }, 500);
     };
 
     const endBtn = document.getElementById("endBtn");
@@ -1048,6 +1191,7 @@
   }
 
 function nextQuestion() {
+  clearQuestionTimers();
   audio.pause();
   audio.currentTime = 0;
   updatePlayButton();
@@ -1121,6 +1265,7 @@ function nextQuestion() {
   }
 
   function showAnswer() {
+    clearAnswerDelayTimer();
     audio.pause();
     updatePlayButton();
 
@@ -1155,6 +1300,19 @@ function nextQuestion() {
       document.getElementById("nextBtn").classList.remove("hidden");
       document.getElementById("endBtn").classList.remove("hidden");
     }
+
+    if (autoPlayEnabled) {
+      clearAutoNextTimer();
+      autoNextTimer = setTimeout(() => {
+        autoNextTimer = null;
+
+        if (current === questions.length - 1) {
+          endGame();
+        } else {
+          nextQuestion();
+        }
+      }, 5000);
+    }
   }
 
   function judgeAnswer(isCorrect) {
@@ -1182,6 +1340,7 @@ function nextQuestion() {
   }
 
   function endGame() {
+  clearQuestionTimers();
   audio.pause();
   audio.currentTime = 0;
   updatePlayButton();

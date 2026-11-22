@@ -915,7 +915,7 @@
       <span>モード</span>
       <div class="mode-buttons">
         <label>
-          <input type="radio" name="quizMode" value="normal" checked>
+          <input type="radio" name="quizMode" value="normal">
           <span>通常</span>
         </label>
         <label>
@@ -923,7 +923,7 @@
           <span>オート</span>
         </label>
         <label>
-          <input type="radio" name="quizMode" value="scoring">
+          <input type="radio" name="quizMode" value="scoring" checked>
           <span>採点</span>
         </label>
       </div>
@@ -1386,7 +1386,7 @@
   let correctCount = 0;
   let answeredCount = 0;
   let answered = false;
-  let quizMode = "normal";
+  let quizMode = "scoring";
   let answerDelayTimer = null;
   let autoNextTimer = null;
 

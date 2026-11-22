@@ -926,6 +926,10 @@
           <input type="radio" name="quizMode" value="scoring" checked>
           <span>採点</span>
         </label>
+        <label>
+          <input type="radio" name="quizMode" value="choice">
+          <span>3択</span>
+        </label>
       </div>
     </div>
 
@@ -940,6 +944,9 @@
   <!-- 出題画面 -->
   <div id="quiz" class="hidden">
     <h2 id="progress"></h2>
+    <div id="choiceQuestion" class="answer hidden" aria-live="polite"></div>
+    <div id="choiceOptions" class="hidden"></div>
+    <p id="choiceFeedback" aria-live="polite"></p>
     <button id="showAnswerBtn" onclick="showAnswer()">解答へ</button>
     <div id="answer" class="answer hidden"></div>
     <div id="judgeButtons" class="hidden">
@@ -1389,6 +1396,61 @@
   let quizMode = "scoring";
   let answerDelayTimer = null;
   let autoNextTimer = null;
+  let choiceOptions = [];
+
+  function loadChoices(q) {
+    audio.pause();
+    audio.onended = null;
+    audio.onloadedmetadata = null;
+    const seenAudio = new Set([q.audio]);
+    const distractors = shuffle([...data]).filter(item => {
+      if (seenAudio.has(item.audio)) return false;
+      seenAudio.add(item.audio);
+      return true;
+    }).slice(0, 2);
+    choiceOptions = shuffle([q, ...distractors]);
+    const prompt = document.getElementById("choiceQuestion");
+    prompt.innerHTML = `<div class="answer-title">${q.title}</div>
+      <small class="${lineColors[q.line] || ""}">${formatStation(q.station, q.line)}</small>`;
+    const bgClass = lineBackgrounds[q.line];
+    if (bgClass) document.body.classList.add(bgClass);
+    const container = document.getElementById("choiceOptions");
+    container.replaceChildren();
+    choiceOptions.forEach((item, index) => {
+      const row = document.createElement("div");
+      const play = document.createElement("button");
+      play.textContent = `${index + 1} ▶再生`;
+      play.onclick = () => {
+        audio.pause();
+        audio.src = item.audio;
+        audio.volume = item.line === "東西線" ? 0.55 : 1;
+        audio.play().catch(() => {
+          document.getElementById("choiceFeedback").textContent = "音声を再生できません。もう一度お試しください。";
+        });
+      };
+      const select = document.createElement("button");
+      select.textContent = `${index + 1}を選ぶ`;
+      select.dataset.choiceAnswer = "true";
+      select.onclick = () => {
+        if (answered) return;
+        const correct = item === q;
+        judgeAnswer(correct);
+        showAnswer();
+        audio.src = q.audio;
+        audio.volume = q.line === "東西線" ? 0.55 : 1;
+        document.getElementById("choiceFeedback").textContent =
+          `${correct ? "正解！" : "不正解"} 正解は ${choiceOptions.indexOf(q) + 1} 番です。`;
+        container.querySelectorAll("[data-choice-answer]").forEach(button => button.disabled = true);
+      };
+      row.append(play, select);
+      container.append(row);
+    });
+    document.getElementById("answerButtons").classList.remove("hidden");
+    document.getElementById("playBtn").classList.add("hidden");
+    document.getElementById("nextBtn").classList.add("hidden");
+    document.getElementById("nextBtn").disabled = true;
+    document.getElementById("endBtn").classList.remove("hidden");
+  }
 
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -1491,11 +1553,14 @@
 
   function loadQuestion() {
     clearQuestionTimers();
+    document.getElementById("choiceQuestion").classList.toggle("hidden", quizMode !== "choice");
+    document.getElementById("choiceOptions").classList.toggle("hidden", quizMode !== "choice");
+    document.getElementById("choiceFeedback").textContent = "";
     document.getElementById("judgeButtons").classList.add("hidden");
     document.getElementById("answerButtons").classList.add("hidden");
     document.getElementById("answer").classList.add("hidden");
     document.getElementById("answer").innerHTML = "";
-    document.getElementById("showAnswerBtn").classList.toggle("hidden", quizMode === "auto");
+    document.getElementById("showAnswerBtn").classList.toggle("hidden", quizMode === "auto" || quizMode === "choice");
 
     answered = false;
     
@@ -1532,6 +1597,11 @@
     audio.src = questions[current].audio;
 
     const q = questions[current];
+
+    if (quizMode === "choice") {
+      loadChoices(q);
+      return;
+    }
 
       if (q.line === "東西線") {
         audio.volume = 0.55;
@@ -1571,7 +1641,7 @@
   }
 
 function nextQuestion() {
-  if (quizMode === "scoring" && !answered) {
+  if ((quizMode === "scoring" || quizMode === "choice") && !answered) {
     return;
   }
 
@@ -1613,6 +1683,13 @@ function nextQuestion() {
     clearAnswerDelayTimer();
     audio.pause();
     updatePlayButton();
+
+    if (quizMode === "choice") {
+      // 問題のカードと背景を保ち、回答後の操作だけを表示する。
+      document.getElementById("nextBtn").classList.remove("hidden");
+      document.getElementById("nextBtn").disabled = !answered;
+      return;
+    }
 
     const q = questions[current];
     const lineClass = lineColors[q.line] || "";
@@ -1690,7 +1767,7 @@ function nextQuestion() {
   function showResult() {
     const scoreElement = document.getElementById("score");
 
-    if (quizMode !== "scoring") {
+    if (quizMode !== "scoring" && quizMode !== "choice") {
       scoreElement.classList.add("plain-result");
       scoreElement.innerHTML = "";
       return;

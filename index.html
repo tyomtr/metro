@@ -1397,13 +1397,14 @@
   let answerDelayTimer = null;
   let autoNextTimer = null;
   let choiceOptions = [];
+  let choicePool = [];
 
   function loadChoices(q) {
     audio.pause();
     audio.onended = null;
     audio.onloadedmetadata = null;
     const seenAudio = new Set([q.audio]);
-    const distractors = shuffle([...data]).filter(item => {
+    const distractors = shuffle([...choicePool]).filter(item => {
       if (seenAudio.has(item.audio)) return false;
       seenAudio.add(item.audio);
       return true;
@@ -1418,6 +1419,11 @@
     container.replaceChildren();
     choiceOptions.forEach((item, index) => {
       const row = document.createElement("div");
+      const detail = document.createElement("div");
+      detail.classList.add("hidden");
+      detail.dataset.choiceDetail = "true";
+      detail.innerHTML = `<strong>${item.title}</strong><br>
+        <small class="${lineColors[item.line] || ""}">${formatStation(item.station, item.line)}</small>`;
       const play = document.createElement("button");
       play.textContent = `${index + 1} ▶再生`;
       play.onclick = () => {
@@ -1441,8 +1447,9 @@
         document.getElementById("choiceFeedback").textContent =
           `${correct ? "正解！" : "不正解"} 正解は ${choiceOptions.indexOf(q) + 1} 番です。`;
         container.querySelectorAll("[data-choice-answer]").forEach(button => button.disabled = true);
+        container.querySelectorAll("[data-choice-detail]").forEach(element => element.classList.remove("hidden"));
       };
-      row.append(play, select);
+      row.append(play, select, detail);
       container.append(row);
     });
     document.getElementById("answerButtons").classList.remove("hidden");
@@ -1536,6 +1543,7 @@
 
       return false;
     });
+    choicePool = filteredData;
     const shuffled = shuffle([...filteredData]);
 
     questions = shuffled.slice(0, Math.min(count, shuffled.length));
